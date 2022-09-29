@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+DirectXGame/.vs/DirectXGame/v16/.suo
+*.db-shm
+*.opendb
+DirectXGame/.vs/DirectXGame/v16/Browse.VC.db-wal
+DirectXGame/.vs/DirectXGame/v16/Browse.VC.db
+DirectXGame/.vs/DirectXGame/v16/.suo
+DirectXGame/.vs/DirectXGame/v16/.suo
