@@ -3,12 +3,13 @@
 #include "PixelShader.h"
 #include "VertexBuffer.h"
 #include "ConstantBuffer.h"
+#include <iostream>
 //#include "IndexBuffer.h"
 
 class Quad
 {
 public:
-	Quad();
+	Quad(std::string name, void* shader_byte_code, size_t size_shader);
 	~Quad();
 
 	void update(float deltaTime);
