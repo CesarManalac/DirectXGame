@@ -1,1 +1,2 @@
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe
+C:\Users\Student\Documents\GitHub\GDENG2-DirectX\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe
