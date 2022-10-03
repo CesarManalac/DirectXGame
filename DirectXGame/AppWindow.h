@@ -7,6 +7,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
+#include "Quad.h"
 
 class AppWindow :public Window
 {
