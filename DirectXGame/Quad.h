@@ -19,11 +19,10 @@ struct vertex
 	vec3 color1;
 };
 
-
 class Quad
 {
 public:
-	Quad(void* shader_byte_code, size_t shader_size);
+	Quad(void* shader_byte_code, size_t shader_size, int index);
 	~Quad();
 
 	void Update(float deltaTime);
@@ -36,15 +35,14 @@ private:
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 
-	vertex list[4];
+	vertex dataList[4];
 	UINT size_list;
 
 	void* m_shader_byte_code;
 	size_t m_shader_size;
 
-	float ticks = 0.0f;
-	float deltaPos = 0.0f;
-	float deltaTime = 0.0f;
-	//float speed = 10.0f;
+	//float ticks = 0.0f;
+	//float deltaPos = 0.0f;
+	//float deltaTime = 0.0f;
 };
 
