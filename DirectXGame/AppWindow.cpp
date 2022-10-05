@@ -1,7 +1,7 @@
 #include "AppWindow.h"
 #include <Windows.h>
 
-struct vec3 
+struct vec3
 {
 	float x, y, z;
 };
@@ -78,6 +78,7 @@ void AppWindow::onCreate()
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
+	Quad one = Quad(&shader_byte_code, size_shader);
 
 	/*VERTEX SHADER*/
 	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);

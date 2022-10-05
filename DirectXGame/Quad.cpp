@@ -1,19 +1,29 @@
 #include "Quad.h"
+#include <iostream>
 
-Quad::Quad()
+Quad::Quad(void* shader_byte_code, size_t shader_size)
 {
+	std::cout << "Loaded\n";
 }
 
 Quad::~Quad()
 {
 }
 
-void Quad::update(float deltaTime)
+void Quad::Update(float deltaTime)
+{
+
+}
+/*
+	Same as AppWindow onCreate
+*/
+void Quad::Draw(VertexShader* vertexShader, PixelShader* pixelShader)
 {
 
 }
 
-void Quad::draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader)
+void Quad::Load()
 {
 
 }
+

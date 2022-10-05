@@ -1,3 +1,4 @@
 ﻿  AppWindow.cpp
-C:\Users\Student\Documents\GitHub\GDENG2-DirectX\DirectXGame\DirectXGame\AppWindow.cpp(86,75): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
-  DirectXGame.vcxproj -> C:\Users\Student\Documents\GitHub\GDENG2-DirectX\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe
+  VertexShader.cpp
+  Generating Code...
+  DirectXGame.vcxproj -> C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe
