@@ -1,18 +1,18 @@
 #include "AppWindow.h"
 #include <Windows.h>
 
-struct vec3
-{
-	float x, y, z;
-};
-
-struct vertex
-{
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
-};
+//struct vec3
+//{
+//	float x, y, z;
+//};
+//
+//struct vertex
+//{
+//	vec3 position;
+//	vec3 position1;
+//	vec3 color;
+//	vec3 color1;
+//};
 
 __declspec(align(16))
 struct constant 
@@ -36,20 +36,20 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
-	vertex list[] =
-	{
-		/*{-0.25f, -0.25f, 0.0f, 1,0,0},
-		{ 0.0f, 0.25f, 0.0f, 0,1,0},
-		{ 0.25f, -0.25f, 0.0f, 0,0,1}*/
-		/*{-0.5f,-0.5f, 0.0f,	-0.32f,-0.11f,0.0f,	0,0,0,	0,1,0},
-		{-0.5f, 0.5f, 0.0f,	-0.11f, 0.78f,0.0f,	1,1,0,	0,1,1},
-		{ 0.5f,-0.5f, 0.0f,	 0.75f,-0.73f,0.0f,	0,0,1,	1,0,0},
-		{ 0.5f, 0.5f, 0.0f,	 0.88f, 0.77f,0.0f,	1,1,1,	0,0,1}*/
-		{-0.5f,-0.5f, 0.0f,	-0.5f,-0.5f, 0.0f,	0,0,0,	0,1,0},
-		{-0.5f, 0.5f, 0.0f,	-0.5f, 0.5f, 0.0f,	1,1,0,	0,1,1},
-		{ 0.5f,-0.5f, 0.0f,	 0.5f,-0.5f, 0.0f,	0,0,1,	1,0,0},
-		{ 0.5f, 0.5f, 0.0f,	 0.5f, 0.5f, 0.0f,	1,1,1,	0,0,1}
-	};
+	//vertex list[] =
+	//{
+	//	/*{-0.25f, -0.25f, 0.0f, 1,0,0},
+	//	{ 0.0f, 0.25f, 0.0f, 0,1,0},
+	//	{ 0.25f, -0.25f, 0.0f, 0,0,1}*/
+	//	/*{-0.5f,-0.5f, 0.0f,	-0.32f,-0.11f,0.0f,	0,0,0,	0,1,0},
+	//	{-0.5f, 0.5f, 0.0f,	-0.11f, 0.78f,0.0f,	1,1,0,	0,1,1},
+	//	{ 0.5f,-0.5f, 0.0f,	 0.75f,-0.73f,0.0f,	0,0,1,	1,0,0},
+	//	{ 0.5f, 0.5f, 0.0f,	 0.88f, 0.77f,0.0f,	1,1,1,	0,0,1}*/
+	//	{-0.5f,-0.5f, 0.0f,	-0.5f,-0.5f, 0.0f,	0,0,0,	0,1,0},
+	//	{-0.5f, 0.5f, 0.0f,	-0.5f, 0.5f, 0.0f,	1,1,0,	0,1,1},
+	//	{ 0.5f,-0.5f, 0.0f,	 0.5f,-0.5f, 0.0f,	0,0,1,	1,0,0},
+	//	{ 0.5f, 0.5f, 0.0f,	 0.5f, 0.5f, 0.0f,	1,1,1,	0,0,1}
+	//};
 	//vertex rect_list[] =
 	//{
 	//	/*{0.45f, -0.25f, 0.0f,		0,1,0},
@@ -72,19 +72,19 @@ void AppWindow::onCreate()
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	//m_vb_rect = GraphicsEngine::get()->createVertexBuffer();
 	//m_vb_rect2 = GraphicsEngine::get()->createVertexBuffer();
-	UINT size_list = ARRAYSIZE(list);
+	//UINT size_list = ARRAYSIZE(list);
 	//UINT size_list_rect = ARRAYSIZE(rect_list);
 	//UINT size_list_rect2 = ARRAYSIZE(rect_list2);
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
 	Quad one = Quad(&shader_byte_code, size_shader);
-
+	
 	/*VERTEX SHADER*/
 	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
 	m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
-	m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	//m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 	//m_vb_rect->load(rect_list, sizeof(vertex), size_list_rect, shader_byte_code, size_shader);
 	//m_vb_rect2->load(rect_list2, sizeof(vertex), size_list_rect2, shader_byte_code, size_shader);
 

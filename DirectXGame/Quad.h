@@ -28,7 +28,7 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(VertexShader* vertexShader, PixelShader* pixelShader);
-	void Load();
+	void Load(int index);
 
 private:
 	ConstantBuffer* constantBuffer;
@@ -36,8 +36,11 @@ private:
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 
-	vertex m_vlist[4];
-	UINT m_size_list;
+	vertex list[4];
+	UINT size_list;
+
+	void* m_shader_byte_code;
+	size_t m_shader_size;
 
 	float ticks = 0.0f;
 	float deltaPos = 0.0f;
