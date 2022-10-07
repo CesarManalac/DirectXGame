@@ -8,6 +8,7 @@
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
 #include "Quad.h"
+#include "EngineTime.h"
 
 
 class AppWindow :public Window
@@ -35,6 +36,9 @@ private:
 private:
 	unsigned long m_old_time = 0;
 	float m_delta_time = 0;
-	float m_angle;
+	float m_speed = 1;
+	/*float max_speed = 20;*/
+	float time = 0;
+	bool reset = true;
 };
 

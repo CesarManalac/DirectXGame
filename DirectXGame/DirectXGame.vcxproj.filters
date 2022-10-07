@@ -34,6 +34,9 @@
     <Filter Include="GameEngine\GraphicsEngine\Shapes">
       <UniqueIdentifier>{46462326-76ce-4bad-b098-a2a692c185e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\EngineTime">
+      <UniqueIdentifier>{c7c4c45e-09d2-4d06-b3e6-3f0d13277a30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -69,6 +72,9 @@
     <ClCompile Include="Quad.cpp">
       <Filter>GameEngine\GraphicsEngine\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="EngineTime.cpp">
+      <Filter>GameEngine\GraphicsEngine\EngineTime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -101,6 +107,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Quad.h">
       <Filter>GameEngine\GraphicsEngine\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTime.h">
+      <Filter>GameEngine\GraphicsEngine\EngineTime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

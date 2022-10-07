@@ -28,6 +28,7 @@ public:
 	void Update(float deltaTime);
 	void Draw(VertexShader* vertexShader, PixelShader* pixelShader);
 	void Load(int index);
+	void Release();
 
 private:
 	ConstantBuffer* constantBuffer;
