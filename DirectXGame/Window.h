@@ -18,6 +18,7 @@ public:
 	virtual void onCreate();
 	virtual void onUpdate();
 	virtual void onDestroy();
+	virtual void onMouseClick(POINT);
 
 	~Window();
 
