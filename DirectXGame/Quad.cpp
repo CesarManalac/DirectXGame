@@ -93,7 +93,7 @@ void Quad::UpdateQuadPosition()
 	cc.m_world *= temp;
 
 	cc.m_view.setIdentity();
-	cc.m_projection.setOrtho((window.right - window.left) / 400.0f, (window.bottom - window.top) / 400.0f, -20.0f, 20.0f);
+	cc.m_projection.setOrtho((window.right - window.left) / 400.0f, (window.bottom - window.top) / 400.0f, -4.0f, 4.0f);
 
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);

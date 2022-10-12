@@ -20,6 +20,7 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 	quad1 = new Quad(rc);
+
 }
 
 void AppWindow::onUpdate()
@@ -46,32 +47,33 @@ void AppWindow::onDestroy()
 
 void AppWindow::onMouseClick(POINT new_pos)
 {
-	RECT rc = this->getClientWindowRect();
-	float width, height;
-	width = rc.right - rc.left;
-	height = rc.bottom - rc.top;
-	width /= 2;
-	height /= 2;
+	//RECT rc = this->getClientWindowRect();
+	//float width, height;
+	//width = rc.right - rc.left;
+	//height = rc.bottom - rc.top;
+	//width /= 2;
+	//height /= 2;
 
-	if (new_pos.x >= 502) {
-		new_pos.x *= 1;
-	}
-	else {
-		new_pos.x *= -1;
-	}
-	if (new_pos.y >= 362.5) {
-		new_pos.y *= -1;
-	}
-	else {
-		new_pos.y *= 1;
-	}
-	float x, y;
-	x = new_pos.x / width;
-	y = new_pos.y / height;
-	float x_decimal, y_decimal;
-	x = std::modf(x, &x_decimal);
-	y = std::modf(y, &y_decimal);
-	std::cout << x << " " << y << "\n";
+	//if (new_pos.x >= 502) {
+	//	new_pos.x *= 1;
+	//}
+	//else {
+	//	new_pos.x *= -1;
+	//}
+	//if (new_pos.y >= 362.5) {
+	//	new_pos.y *= -1;
+	//}
+	//else {
+	//	new_pos.y *= 1;
+	//}
+	//float x, y;
+	//x = new_pos.x / width;
+	//y = new_pos.y / height;
+	//float x_decimal, y_decimal;
+	//x = std::modf(x, &x_decimal);
+	//y = std::modf(y, &y_decimal);
+	//std::cout << x << " " << y << "\n";
+	//quad1 = new Quad(Vector3(x, y,0), rc);
 
-	quad1 = new Quad(Vector3(x, y,0), rc);
+	std::cout << "click\n";
 }
