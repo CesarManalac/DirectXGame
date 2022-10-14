@@ -28,7 +28,7 @@ public:
 		m_mat[0][0] = 2.0f / width;
 		m_mat[1][1] = 2.0f / height;
 		m_mat[2][2] = 1 / (far_plane - near_plane);
-		m_mat[3][3] = -(near_plane / (far_plane - near_plane));
+		m_mat[3][2] = -(near_plane / (far_plane - near_plane));
 	}
 
 	void setScale(const Vector3& scale) {
@@ -36,6 +36,27 @@ public:
 		m_mat[0][0] = scale.x;
 		m_mat[1][1] = scale.y;
 		m_mat[2][2] = scale.z;
+	}
+
+	void setRotationX(float m_x) {
+		m_mat[1][1] = cos(m_x);
+		m_mat[1][2] = sin(m_x);
+		m_mat[2][1] = -sin(m_x);
+		m_mat[2][2] = cos(m_x);
+	}
+
+	void setRotationY(float m_y) {
+		m_mat[0][0] = cos(m_y);
+		m_mat[0][2] = -sin(m_y);
+		m_mat[2][0] = sin(m_y);
+		m_mat[2][2] = cos(m_y);
+	}
+
+	void setRotationZ(float m_z) {
+		m_mat[0][0] = cos(m_z);
+		m_mat[0][1] = sin(m_z);
+		m_mat[1][0] = -sin(m_z);
+		m_mat[1][1] = cos(m_z);
 	}
 
 	void operator*=(const Matrix4x4& matrix) {

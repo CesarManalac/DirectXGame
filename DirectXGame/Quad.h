@@ -8,11 +8,11 @@
 #include "EngineTime.h"
 #include "Vector3.h"
 #include "Matrix4x4.h"
+#include "IndexBuffer.h"
 
 struct vertex
 {
 	Vector3 position;
-	Vector3 position1;
 	Vector3 color;
 	Vector3 color1;
 };
@@ -42,8 +42,8 @@ private:
 	VertexBuffer* m_vb;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
+	IndexBuffer* m_ib;
 
-	UINT size_list;
 	RECT window;
 	Vector3 tempPosition;
 
@@ -52,5 +52,11 @@ private:
 	size_t m_shader_size;
 	float time;
 	float m_speed = 1;
+	bool reset = true;
+private:
+	float m_old_delta;
+	float m_delta_time;
+	float m_delta_pos = 0;
+	float m_delta_scale = 0;
 };
 

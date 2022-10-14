@@ -20,7 +20,6 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 	quad1 = new Quad(rc);
-
 }
 
 void AppWindow::onUpdate()

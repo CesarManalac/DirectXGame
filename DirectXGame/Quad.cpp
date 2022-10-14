@@ -4,24 +4,57 @@
 
 Quad::Quad(RECT rc)
 {
-	void* shader_byte_code = nullptr;
-	size_t size_shader = 0;
 	window = rc;
-	vertex list[] =
-	{
-		{Vector3(-0.25f,-0.25f, 0.0f), Vector3(-0.90f,-0.25f, 0.0f),	Vector3(0,0,0),	Vector3(0,1,0)},
-		{Vector3(-0.25f, 0.25f, 0.0f),	Vector3(-0.90f, 0.25f, 0.0f), Vector3(1,1,0), Vector3(0,1,1)},
-		{Vector3( 0.25f,-0.25f, 0.0f), Vector3(-0.45f,-0.25f, 0.0f), Vector3(0,0,1),	Vector3(1,0,0)},
-		{Vector3( 0.25f, 0.25f, 0.0f),	Vector3(-0.45f, 0.25f, 0.0f),	Vector3(1,1,1),	Vector3(0,0,1)}
+	vertex vertex_list[] =
+	{		
+		{Vector3(-0.5f,-0.5f,-0.5f),  Vector3(0,0,0), Vector3(0,1,0) },
+		{Vector3(-0.5f,0.5f,-0.5f),   Vector3(1,1,0), Vector3(0,1,1) },
+		{ Vector3(0.5f,0.5f,-0.5f),   Vector3(0,0,1), Vector3(1,0,0) },
+		{ Vector3(0.5f,-0.5f,-0.5f),  Vector3(1,1,1), Vector3(0,0,1) },
+
+		//BACK FACE
+		{ Vector3(0.5f,-0.5f,0.5f),   Vector3(1,0,1), Vector3(0,1,0) },
+		{ Vector3(0.5f,0.5f,0.5f),    Vector3(1,1,0), Vector3(0,0,1) },
+		{ Vector3(-0.5f,0.5f,0.5f),   Vector3(1,0,1), Vector3(0,1,0) },
+		{ Vector3(-0.5f,-0.5f,0.5f),  Vector3(0,1,1), Vector3(0,0,1) }
 	};
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
-	size_list = ARRAYSIZE(list);
+	UINT size_list = ARRAYSIZE(vertex_list);
+	
+	unsigned int index_list[] =
+	{
+		//FRONT SIDE
+		0,1,2,  //FIRST TRIANGLE
+		2,3,0,  //SECOND TRIANGLE
+		//BACK SIDE
+		4,5,6,
+		6,7,4,
+		//TOP SIDE
+		1,6,5,
+		5,2,1,
+		//BOTTOM SIDE
+		7,0,3,
+		3,4,7,
+		//RIGHT SIDE
+		3,2,5,
+		5,4,3,
+		//LEFT SIDE
+		7,6,1,
+		1,0,7
+	};
 
+	m_ib = GraphicsEngine::get()->createIndexBuffer();
+	UINT size_index_list = ARRAYSIZE(index_list);
+
+	m_ib->load(index_list, size_index_list);
+
+	void* shader_byte_code = nullptr;
+	size_t size_shader = 0;
 	/*VERTEX SHADER*/
 	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 	m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
 	
-	m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	m_vb->load(vertex_list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 	
 	GraphicsEngine::get()->releaseCompiledShader();
 
@@ -30,7 +63,6 @@ Quad::Quad(RECT rc)
 	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::get()->releaseCompiledShader();
 
-	tempPosition = Vector3(0, 0, 0);
 	constant cc;
 	cc.m_angle = 0;
 
@@ -40,38 +72,38 @@ Quad::Quad(RECT rc)
 
 Quad::Quad(Vector3 offset, RECT rc)
 {
-	void* shader_byte_code = nullptr;
-	size_t size_shader = 0;
-	window = rc;
-	tempPosition = offset;
-	vertex list[] =
-	{
-		{Vector3(-0.5f,-0.5f, 0.0f), Vector3(-0.5f,-0.5f, 0.0f) + offset,	Vector3(0,0,0),	Vector3(0,1,0)},
-		{Vector3(-0.5f, 0.5f, 0.0f), Vector3(-0.5f, 0.5f, 0.0f) + offset,  Vector3(1,1,0), Vector3(0,1,1)},
-		{Vector3( 0.5f,-0.5f, 0.0f), Vector3( 0.5f,-0.5f, 0.0f) + offset,  Vector3(0,0,1),	Vector3(1,0,0)},
-		{Vector3( 0.5f, 0.5f, 0.0f), Vector3( 0.5f, 0.5f, 0.0f) + offset,	Vector3(1,1,1),	Vector3(0,0,1)}
-	};
-	m_vb = GraphicsEngine::get()->createVertexBuffer();
-	size_list = ARRAYSIZE(list);
+	//void* shader_byte_code = nullptr;
+	//size_t size_shader = 0;
+	//window = rc;
+	//tempPosition = offset;
+	//vertex list[] =
+	//{
+	//	{Vector3(-0.5f,-0.5f, 0.0f), 	Vector3(0,0,0),	Vector3(0,1,0)},
+	//	{Vector3(-0.5f, 0.5f, 0.0f),  Vector3(1,1,0), Vector3(0,1,1)},
+	//	{Vector3( 0.5f,-0.5f, 0.0f),  Vector3(0,0,1),	Vector3(1,0,0)},
+	//	{Vector3( 0.5f, 0.5f, 0.0f), 	Vector3(1,1,1),	Vector3(0,0,1)}
+	//};
+	//m_vb = GraphicsEngine::get()->createVertexBuffer();
+	//size_list = ARRAYSIZE(list);
 
-	/*VERTEX SHADER*/
-	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-	m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
+	///*VERTEX SHADER*/
+	//GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
+	//m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
 
-	m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	//m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 
-	GraphicsEngine::get()->releaseCompiledShader();
+	//GraphicsEngine::get()->releaseCompiledShader();
 
-	/*PIXEL SHADER*/
-	GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
-	GraphicsEngine::get()->releaseCompiledShader();
+	///*PIXEL SHADER*/
+	//GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
+	//m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
+	//GraphicsEngine::get()->releaseCompiledShader();
 
-	constant cc;
-	cc.m_angle = 0;
+	//constant cc;
+	//cc.m_angle = 0;
 
-	m_cb = GraphicsEngine::get()->createConstantBuffer();
-	m_cb->load(&cc, sizeof(constant));
+	//m_cb = GraphicsEngine::get()->createConstantBuffer();
+	//m_cb->load(&cc, sizeof(constant));
 }
 
 Quad::~Quad()
@@ -80,16 +112,35 @@ Quad::~Quad()
 
 void Quad::UpdateQuadPosition()
 {
-	time += EngineTime::getDeltaTime() * m_speed;
 	constant cc;
-	cc.m_angle = time;
+	cc.m_angle = EngineTime::getDeltaTime();
 
+	m_delta_pos += time / 10.0f;
 	Matrix4x4 temp;
 
-	cc.m_world.setTranslation(Vector3(0, 0, 0));
-	temp.setTranslation(tempPosition);
+	if (m_delta_pos > 1.0f) {
+		m_delta_pos = 0;
+	}
 
-	cc.m_world.setScale(Vector3(.5,.5,.5));
+	m_delta_scale += time / 0.55f;
+
+	//cc.m_world.setTranslation(Vector3(1, 1, 1));
+	//cc.m_world.setScale(Vector3::lerp(Vector3(.5, .5, 0), Vector3(1, 1, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
+	//temp.setTranslation(Vector3::lerp(Vector3(-.5, -.5, 0), Vector3(.5, .5, 0), m_delta_pos));
+	
+	//cc.m_world *= temp;
+	cc.m_world.setScale(Vector3(1, 1, 1));
+
+	temp.setIdentity();
+	temp.setRotationZ(m_delta_scale);
+	cc.m_world *= temp;
+	
+	temp.setIdentity();
+	temp.setRotationY(m_delta_scale);
+	cc.m_world *= temp;
+
+	temp.setIdentity();
+	temp.setRotationX(m_delta_scale);
 	cc.m_world *= temp;
 
 	cc.m_view.setIdentity();
@@ -110,14 +161,22 @@ void Quad::Update()
 	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::get()->getImmediateDeviceContext()->setPixelShader(m_ps);
 	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
-	GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
+	GraphicsEngine::get()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
+
+	GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
+	m_old_delta = time;
+	time = EngineTime::getDeltaTime();
+	m_delta_time = (m_old_delta) ? ((time - m_old_delta) / 1000.0f):0;
 }
 
 
 void Quad::Release()
 {
 	m_vb->release();
+	m_ib->release();
+	m_cb->release();
 	m_vs->release();
 	m_ps->release();
+
 }
 
