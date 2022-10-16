@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "Vector3.h"
+#include "Vector3D.h"
 
 class Matrix4x4 
 {
@@ -15,7 +15,7 @@ public:
 		m_mat[2][2] = 1;
 		m_mat[3][3] = 1;
 	}
-	void setTranslation(const Vector3& translation) {
+	void setTranslation(const Vector3D& translation) {
 		setIdentity();
 		m_mat[3][0] = translation.x;
 		m_mat[3][1] = translation.y;
@@ -31,7 +31,7 @@ public:
 		m_mat[3][2] = -(near_plane / (far_plane - near_plane));
 	}
 
-	void setScale(const Vector3& scale) {
+	void setScale(const Vector3D& scale) {
 		setIdentity();
 		m_mat[0][0] = scale.x;
 		m_mat[1][1] = scale.y;

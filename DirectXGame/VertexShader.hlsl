@@ -17,7 +17,7 @@ cbuffer constant:register(b0)
 	row_major float4x4 m_world;
 	row_major float4x4 m_view;
 	row_major float4x4 m_projection;
-	float m_angle;
+	float m_time;
 };
 
 VS_OUTPUT vsmain(VS_INPUT input)
@@ -27,7 +27,7 @@ VS_OUTPUT vsmain(VS_INPUT input)
 	output.position = mul(input.position, m_world);
 	//VIEW SPACE
 	output.position = mul(output.position, m_view);
-	//Projection
+	//SCREEN SPACE
 	output.position = mul(output.position, m_projection);
 	
 	output.color = input.color;

@@ -9,9 +9,12 @@
 #include "ConstantBuffer.h"
 #include "Quad.h"
 #include "EngineTime.h"
-#include "Vector3.h"
+#include "Vector3D.h"
 #include "Matrix4x4.h"
+#include "AGameObject.h"
+#include "Cube.h"
 #include <conio.h>
+#include <vector>
 
 class AppWindow :public Window
 {
@@ -26,7 +29,8 @@ public:
 	virtual void onMouseClick(POINT) override;
 private:
 	SwapChain* m_swap_chain;
-	Quad* quad1;
+	//Quad* quad1;
+	std::vector <Cube*> cubeList;
 
 private:
 	POINT old_mouse = {};

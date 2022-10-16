@@ -2,21 +2,21 @@
 #include <iostream>
 #include "Window.h"
 
-Quad::Quad(RECT rc)
+Quad::Quad(string name) : AGameObject(name)
 {
-	window = rc;
 	vertex vertex_list[] =
-	{		
-		{Vector3(-0.5f,-0.5f,-0.5f),  Vector3(0,0,0), Vector3(0,1,0) },
-		{Vector3(-0.5f,0.5f,-0.5f),   Vector3(1,1,0), Vector3(0,1,1) },
-		{ Vector3(0.5f,0.5f,-0.5f),   Vector3(0,0,1), Vector3(1,0,0) },
-		{ Vector3(0.5f,-0.5f,-0.5f),  Vector3(1,1,1), Vector3(0,0,1) },
+	{
+		//FRONT FACE
+		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(0.2f,0,0) },
+		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(0.2f,0.2f,0) },
+		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(0.2f,0.2f,0) },
+		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(0.2f,0,0) },
 
 		//BACK FACE
-		{ Vector3(0.5f,-0.5f,0.5f),   Vector3(1,0,1), Vector3(0,1,0) },
-		{ Vector3(0.5f,0.5f,0.5f),    Vector3(1,1,0), Vector3(0,0,1) },
-		{ Vector3(-0.5f,0.5f,0.5f),   Vector3(1,0,1), Vector3(0,1,0) },
-		{ Vector3(-0.5f,-0.5f,0.5f),  Vector3(0,1,1), Vector3(0,0,1) }
+		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,0.2f,0) },
+		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,0.2f,0) },
 	};
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertex_list);
@@ -26,21 +26,21 @@ Quad::Quad(RECT rc)
 		//FRONT SIDE
 		0,1,2,  //FIRST TRIANGLE
 		2,3,0,  //SECOND TRIANGLE
-		//BACK SIDE
-		4,5,6,
-		6,7,4,
-		//TOP SIDE
-		1,6,5,
-		5,2,1,
-		//BOTTOM SIDE
-		7,0,3,
-		3,4,7,
-		//RIGHT SIDE
-		3,2,5,
-		5,4,3,
-		//LEFT SIDE
-		7,6,1,
-		1,0,7
+		////BACK SIDE
+		//4,5,6,
+		//6,7,4,
+		////TOP SIDE
+		//1,6,5,
+		//5,2,1,
+		////BOTTOM SIDE
+		//7,0,3,
+		//3,4,7,
+		////RIGHT SIDE
+		//3,2,5,
+		//5,4,3,
+		////LEFT SIDE
+		//7,6,1,
+		//1,0,7
 	};
 
 	m_ib = GraphicsEngine::get()->createIndexBuffer();
@@ -64,46 +64,10 @@ Quad::Quad(RECT rc)
 	GraphicsEngine::get()->releaseCompiledShader();
 
 	constant cc;
-	cc.m_angle = 0;
+	cc.m_time = 0;
 
 	m_cb = GraphicsEngine::get()->createConstantBuffer();
 	m_cb->load(&cc, sizeof(constant));
-}
-
-Quad::Quad(Vector3 offset, RECT rc)
-{
-	//void* shader_byte_code = nullptr;
-	//size_t size_shader = 0;
-	//window = rc;
-	//tempPosition = offset;
-	//vertex list[] =
-	//{
-	//	{Vector3(-0.5f,-0.5f, 0.0f), 	Vector3(0,0,0),	Vector3(0,1,0)},
-	//	{Vector3(-0.5f, 0.5f, 0.0f),  Vector3(1,1,0), Vector3(0,1,1)},
-	//	{Vector3( 0.5f,-0.5f, 0.0f),  Vector3(0,0,1),	Vector3(1,0,0)},
-	//	{Vector3( 0.5f, 0.5f, 0.0f), 	Vector3(1,1,1),	Vector3(0,0,1)}
-	//};
-	//m_vb = GraphicsEngine::get()->createVertexBuffer();
-	//size_list = ARRAYSIZE(list);
-
-	///*VERTEX SHADER*/
-	//GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-	//m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
-
-	//m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
-
-	//GraphicsEngine::get()->releaseCompiledShader();
-
-	///*PIXEL SHADER*/
-	//GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	//m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
-	//GraphicsEngine::get()->releaseCompiledShader();
-
-	//constant cc;
-	//cc.m_angle = 0;
-
-	//m_cb = GraphicsEngine::get()->createConstantBuffer();
-	//m_cb->load(&cc, sizeof(constant));
 }
 
 Quad::~Quad()
@@ -113,46 +77,56 @@ Quad::~Quad()
 void Quad::UpdateQuadPosition()
 {
 	constant cc;
-	cc.m_angle = EngineTime::getDeltaTime();
+	cc.m_time = m_delta_time * 2;
 
-	m_delta_pos += time / 10.0f;
+	m_delta_pos += m_delta_time / 10.0f;
 	Matrix4x4 temp;
 
 	if (m_delta_pos > 1.0f) {
 		m_delta_pos = 0;
 	}
 
-	m_delta_scale += time / 0.55f;
+	m_delta_scale += m_delta_time / 0.55f;
 
-	//cc.m_world.setTranslation(Vector3(1, 1, 1));
-	//cc.m_world.setScale(Vector3::lerp(Vector3(.5, .5, 0), Vector3(1, 1, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
-	//temp.setTranslation(Vector3::lerp(Vector3(-.5, -.5, 0), Vector3(.5, .5, 0), m_delta_pos));
+	cc.m_world.setTranslation(Vector3D(1, 1, 1));
+	cc.m_world.setScale(Vector3D::lerp(Vector3D(.5, .5, 0), Vector3D(1, 1, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
+	temp.setTranslation(Vector3D::lerp(Vector3D(-.5, -.5, 0), Vector3D(.5, .5, 0), m_delta_pos));
+	cc.m_world *= temp;
+
+	Matrix4x4 trans;
+	//trans.setTranslation(this->getLocalPosition());
+	//cc.m_world.setScale(this->getLocalScale());
 	
+	//cc.m_world.setTranslation(this->getLocalPosition());
+	
+	//temp.setIdentity();
+	//temp.setRotationZ(m_delta_scale);
 	//cc.m_world *= temp;
-	cc.m_world.setScale(Vector3(1, 1, 1));
-
-	temp.setIdentity();
-	temp.setRotationZ(m_delta_scale);
-	cc.m_world *= temp;
+	//temp.setIdentity();
+	//temp.setRotationY(m_delta_scale);
+	//cc.m_world *= temp;
+	//temp.setIdentity();
+	//temp.setRotationX(m_delta_scale);
+	//cc.m_world *= temp;
 	
-	temp.setIdentity();
-	temp.setRotationY(m_delta_scale);
-	cc.m_world *= temp;
-
-	temp.setIdentity();
-	temp.setRotationX(m_delta_scale);
-	cc.m_world *= temp;
+	//cc.m_world *= trans;
 
 	cc.m_view.setIdentity();
-	cc.m_projection.setOrtho((window.right - window.left) / 400.0f, (window.bottom - window.top) / 400.0f, -4.0f, 4.0f);
+	cc.m_projection.setOrtho((m_width) / 400.0f, (m_height) / 400.0f, -4.0f, 4.0f);
 
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
 }
 
-void Quad::Update()
+void Quad::update(float deltaTime)
 {
+	m_delta_time = deltaTime;
+}
 
+void Quad::draw(int width, int height)
+{
+	m_width = width;
+	m_height = height;
 	UpdateQuadPosition();
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
@@ -164,9 +138,6 @@ void Quad::Update()
 	GraphicsEngine::get()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
-	m_old_delta = time;
-	time = EngineTime::getDeltaTime();
-	m_delta_time = (m_old_delta) ? ((time - m_old_delta) / 1000.0f):0;
 }
 
 
