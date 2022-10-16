@@ -28,7 +28,7 @@ public:
 		m_mat[0][0] = 2.0f / width;
 		m_mat[1][1] = 2.0f / height;
 		m_mat[2][2] = 1 / (far_plane - near_plane);
-		m_mat[3][3] = -(near_plane / (far_plane - near_plane));
+		m_mat[3][2] = -(near_plane / (far_plane - near_plane));
 	}
 
 	void setScale(const Vector3& scale) {

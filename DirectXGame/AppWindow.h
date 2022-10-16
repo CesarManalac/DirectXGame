@@ -27,6 +27,7 @@ public:
 private:
 	SwapChain* m_swap_chain;
 	Quad* quad1;
+	std::vector <Quad*> quadList;
 
 private:
 	POINT old_mouse = {};

@@ -19,7 +19,6 @@ void AppWindow::onCreate()
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
-	quad1 = new Quad(rc);
 }
 
 void AppWindow::onUpdate()
@@ -31,7 +30,14 @@ void AppWindow::onUpdate()
 	//Set default shader in the graphics pipelinee to be able to draw
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	quad1->Update();
+	if (quadList.size() != 0) {
+		for (int i = 0; i < quadList.size(); i++) {
+			//also the draw function
+			quadList[i]->Update();
+		}
+	}
+
+	//quad1->Update();
 	
 	m_swap_chain->present(true);
 }
@@ -74,4 +80,5 @@ void AppWindow::onMouseClick(POINT new_pos)
 	std::cout << x << " " << y << "\n";
 
 	quad1 = new Quad(Vector3(x, y,0), rc);
+	quadList.push_back(quad1);
 }
