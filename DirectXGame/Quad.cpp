@@ -46,10 +46,10 @@ Quad::Quad(Vector3 offset, RECT rc)
 	tempPosition = offset;
 	vertex list[] =
 	{
-		{Vector3(-0.5f,-0.5f, 0.0f), Vector3(-0.5f,-0.5f, 0.0f) + offset,	Vector3(0,0,0),	Vector3(0,1,0)},
-		{Vector3(-0.5f, 0.5f, 0.0f), Vector3(-0.5f, 0.5f, 0.0f) + offset,  Vector3(1,1,0), Vector3(0,1,1)},
-		{Vector3( 0.5f,-0.5f, 0.0f), Vector3( 0.5f,-0.5f, 0.0f) + offset,  Vector3(0,0,1),	Vector3(1,0,0)},
-		{Vector3( 0.5f, 0.5f, 0.0f), Vector3( 0.5f, 0.5f, 0.0f) + offset,	Vector3(1,1,1),	Vector3(0,0,1)}
+		{Vector3(-0.5f,-0.5f, 0.0f), Vector3(-0.5f,-0.5f, 0.0f),	Vector3(0,0,0),	Vector3(0,1,0)},
+		{Vector3(-0.5f, 0.5f, 0.0f), Vector3(-0.5f, 0.5f, 0.0f),  Vector3(1,1,0), Vector3(0,1,1)},
+		{Vector3( 0.5f,-0.5f, 0.0f), Vector3( 0.5f,-0.5f, 0.0f),  Vector3(0,0,1),	Vector3(1,0,0)},
+		{Vector3( 0.5f, 0.5f, 0.0f), Vector3( 0.5f, 0.5f, 0.0f),	Vector3(1,1,1),	Vector3(0,0,1)}
 	};
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	size_list = ARRAYSIZE(list);
@@ -86,10 +86,9 @@ void Quad::UpdateQuadPosition()
 
 	Matrix4x4 temp;
 
-	cc.m_world.setTranslation(Vector3(0, 0, 0));
-	temp.setTranslation(tempPosition);
-
+	//cc.m_world.setTranslation(Vector3(0, 0, 0));
 	cc.m_world.setScale(Vector3(.5,.5,.5));
+	temp.setTranslation(tempPosition);
 	cc.m_world *= temp;
 
 	cc.m_view.setIdentity();
