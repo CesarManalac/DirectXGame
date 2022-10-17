@@ -86,7 +86,7 @@ void Quad::UpdateQuadPosition()
 
 	Matrix4x4 temp;
 
-	//cc.m_world.setTranslation(Vector3(0, 0, 0));
+	cc.m_world.setTranslation(Vector3(0, 0, 0));
 	cc.m_world.setScale(Vector3(.5,.5,.5));
 	temp.setTranslation(tempPosition);
 	cc.m_world *= temp;
