@@ -5,16 +5,16 @@ Plane::Plane(string name):AGameObject(name)
 	vertex vertex_list[] =
 	{
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(1,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(1,1,0) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(1,0,0) },
+		{Vector3D(-0.5f,-0.5f,-0.5f), Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-0.5f,0.5f,-0.5f),  Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(0.5f,-0.5f,-0.5f),  Vector3D(1,1,1), Vector3D(1,1,1) },
 
 		//BACK FACE
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,1,0) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,1,1) },
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,1,1) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,1,0) },
+		{Vector3D(0.5f,-0.5f,0.5f),   Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-0.5f,-0.5f,0.5f),  Vector3D(1,1,1), Vector3D(1,1,1) },
 	};
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertex_list);
@@ -91,15 +91,15 @@ void Plane::UpdatePlanePosition()
 	std::cout << this->getLocalPosition().x << "\n";
 	cc.m_world.setScale(this->getLocalScale());
 
-	//temp.setIdentity();
-	//temp.setRotationZ(m_delta_scale);
-	//cc.m_world *= temp;
-	//temp.setIdentity();
-	//temp.setRotationY(m_delta_scale);
-	//cc.m_world *= temp;
-	//temp.setIdentity();
-	//temp.setRotationX(m_delta_scale);
-	//cc.m_world *= temp;
+	temp.setIdentity();
+	temp.setRotationZ(this->getLocalRotation().x);
+	cc.m_world *= temp;
+	temp.setIdentity();
+	temp.setRotationY(this->getLocalRotation().y);
+	cc.m_world *= temp;
+	temp.setIdentity();
+	temp.setRotationX(this->getLocalRotation().x);
+	cc.m_world *= temp;
 
 	cc.m_world *= trans;
 

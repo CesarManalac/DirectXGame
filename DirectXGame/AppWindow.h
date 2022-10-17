@@ -14,10 +14,11 @@
 #include "AGameObject.h"
 #include "Cube.h"
 #include "Plane.h"
+#include "InputListener.h"
 #include <conio.h>
 #include <vector>
 
-class AppWindow :public Window
+class AppWindow :public Window, public InputListener
 {
 public:
 	AppWindow();
@@ -34,8 +35,25 @@ private:
 	//std::vector <Cube*> cubeList;
 
 	std::vector<AGameObject*> gameObj;
+	float rotX = 0;
+	float rotY = 0;
 
 private:
 	POINT old_mouse = {};
+
+	// Inherited via InputListener
+	virtual void onKeyDown(int key) override;
+	virtual void onKeyUp(int key) override;
+
+	// Inherited via InputListener
+	virtual void onMouseMove(const Point& delta_mouse) override;
+
+	// Inherited via InputListener
+	virtual void onLeftMouseDown(const Point& mouse_pos) override;
+	virtual void onLeftMouseUp(const Point& mouse_pos) override;
+	virtual void onRightMouseDown(const Point& mouse_pos) override;
+	virtual void onRightMouseUp(const Point& mouse_pos) override;
+	virtual void onFocus()override;
+	virtual void onKillFocus()override;
 };
 

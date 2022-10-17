@@ -55,6 +55,9 @@
     <Filter Include="GameEngine\GraphicsEngine\Shapes\Plane">
       <UniqueIdentifier>{13b7b518-8279-44d7-a269-8838ac71a511}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\InputSystem">
+      <UniqueIdentifier>{8e851a26-534e-4c8b-8b86-22b3572db4cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -107,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="Plane.cpp">
       <Filter>GameEngine\GraphicsEngine\Shapes\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>GameEngine\InputSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +167,15 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>GameEngine\GraphicsEngine\Shapes\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>GameEngine\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="InputListener.h">
+      <Filter>GameEngine\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>GameEngine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

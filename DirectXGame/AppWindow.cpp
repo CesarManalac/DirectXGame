@@ -1,4 +1,5 @@
 #include "AppWindow.h"
+#include "InputSystem.h"
 #include <stdlib.h>
 #include <Windows.h>
 
@@ -13,7 +14,7 @@ AppWindow::~AppWindow()
 void AppWindow::onCreate()
 {
 	Window::onCreate();
-	EngineTime::initialize();
+	InputSystem::get()->addListener(this);
 	GraphicsEngine::get()->init();
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 	RECT rc = this->getClientWindowRect();
@@ -40,13 +41,15 @@ void AppWindow::onCreate()
 	gameObj.push_back(cubeObj);
 
 	Plane* planeObj = new Plane("Plane");
-	planeObj->setScale(Vector3D(1, 0, 0));
+	planeObj->setScale(Vector3D(4, 1, .10));
+	planeObj->setRotation(Vector3D(0, 90, 0));
 	gameObj.push_back(planeObj);
 }
 
 void AppWindow::onUpdate()
 {
 	Window::onUpdate();
+	InputSystem::get()->update();
 	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
 		0, 0.3f, 0.4f, 1);
 	RECT rc = this->getClientWindowRect();
@@ -100,4 +103,62 @@ void AppWindow::onMouseClick(POINT new_pos)
 	//quad1 = new Quad(Vector3(x, y,0), rc);
 
 	std::cout << "click\n";
+}
+
+void AppWindow::onKeyDown(int key)
+{
+	if (key == 'W') {
+		rotX += 0.707f * EngineTime::getDeltaTime();
+		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+	}
+	else if (key == 'S') {
+		rotX -= 0.707f * EngineTime::getDeltaTime();
+		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+	}
+	else if (key == 'A') {
+		rotY += 0.707f * EngineTime::getDeltaTime();
+		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+	}
+	else if (key == 'D') {
+		rotY -= 0.707f * EngineTime::getDeltaTime();
+		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+	}
+}
+
+void AppWindow::onKeyUp(int key)
+{
+
+}
+
+void AppWindow::onMouseMove(const Point& delta_mouse)
+{
+	rotX -= delta_mouse.m_y * EngineTime::getDeltaTime();
+	rotY -= delta_mouse.m_x * EngineTime::getDeltaTime();
+	gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
+}
+
+void AppWindow::onLeftMouseDown(const Point& mouse_pos)
+{
+}
+
+void AppWindow::onLeftMouseUp(const Point& mouse_pos)
+{
+}
+
+void AppWindow::onRightMouseDown(const Point& mouse_pos)
+{
+}
+
+void AppWindow::onRightMouseUp(const Point& mouse_pos)
+{
+}
+
+void AppWindow::onFocus()
+{
+	InputSystem::get()->addListener(this);
+}
+
+void AppWindow::onKillFocus()
+{
+	InputSystem::get()->removeListener(this);
 }
