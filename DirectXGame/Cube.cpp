@@ -91,17 +91,17 @@ void Cube::UpdateCubePosition()
 	std::cout << this->getLocalPosition().x << "\n";
 	cc.m_world.setScale(this->getLocalScale());
 
-	temp.setIdentity();
-	temp.setRotationZ(m_delta_scale);
-	cc.m_world *= temp;
+	//temp.setIdentity();
+	//temp.setRotationZ(m_delta_scale);
+	//cc.m_world *= temp;
 
-	temp.setIdentity();
-	temp.setRotationY(m_delta_scale);
-	cc.m_world *= temp;
+	//temp.setIdentity();
+	//temp.setRotationY(m_delta_scale);
+	//cc.m_world *= temp;
 
-	temp.setIdentity();
-	temp.setRotationX(m_delta_scale);
-	cc.m_world *= temp;
+	//temp.setIdentity();
+	//temp.setRotationX(m_delta_scale);
+	//cc.m_world *= temp;
 
 	cc.m_world *= trans;
 

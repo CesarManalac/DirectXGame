@@ -13,6 +13,7 @@
 #include "Matrix4x4.h"
 #include "AGameObject.h"
 #include "Cube.h"
+#include "Plane.h"
 #include <conio.h>
 #include <vector>
 
@@ -30,7 +31,9 @@ public:
 private:
 	SwapChain* m_swap_chain;
 	//Quad* quad1;
-	std::vector <Cube*> cubeList;
+	//std::vector <Cube*> cubeList;
+
+	std::vector<AGameObject*> gameObj;
 
 private:
 	POINT old_mouse = {};

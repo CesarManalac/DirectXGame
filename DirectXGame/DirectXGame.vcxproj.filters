@@ -52,6 +52,9 @@
     <Filter Include="GameEngine\GraphicsEngine\Shapes\Cube">
       <UniqueIdentifier>{f67926b2-16a7-4fc5-a752-b949a0d489b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\Shapes\Plane">
+      <UniqueIdentifier>{13b7b518-8279-44d7-a269-8838ac71a511}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -101,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>GameEngine\GraphicsEngine\Shapes\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>GameEngine\GraphicsEngine\Shapes\Plane</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>GameEngine\GraphicsEngine\Shapes\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>GameEngine\GraphicsEngine\Shapes\Plane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

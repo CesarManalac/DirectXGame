@@ -19,20 +19,29 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 	
-	for (int i = 0; i < 100; i++) {
-		float min = -0.75f;
-		float max = 0.75f;
-		float minSpeed = -3.75;
-		float maxSpeed = 2;
-		float speed = ((((float)rand() / (float)RAND_MAX) * (maxSpeed - minSpeed)) + minSpeed);
-		float x = ((((float)rand() / (float)RAND_MAX) * (max - min)) + min);
-		float y = ((((float)rand() / (float)RAND_MAX) * (max - min))+min);
-		Cube* cubeObj = new Cube("Cube");
-		cubeObj->setSpeed(speed);
-		cubeObj->setPosition(Vector3D(x, y, 0.0f));
-		cubeObj->setScale(Vector3D(0.25, 0.25, .25));
-		this->cubeList.push_back(cubeObj);
-	}
+	//for (int i = 0; i < 1; i++) {
+	//	//float min = -0.75f;
+	//	//float max = 0.75f;
+	//	//float minSpeed = -3.75;
+	//	//float maxSpeed = 2;
+	//	//float speed = ((((float)rand() / (float)RAND_MAX) * (maxSpeed - minSpeed)) + minSpeed);
+	//	//float x = ((((float)rand() / (float)RAND_MAX) * (max - min)) + min);
+	//	//float y = ((((float)rand() / (float)RAND_MAX) * (max - min))+min);
+	//	Cube* cubeObj = new Cube("Cube");
+	//	//cubeObj->setSpeed(speed);
+	//	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
+	//	cubeObj->setScale(Vector3D(0.25, 0.25, .25));
+	//	this->cubeList.push_back(cubeObj);
+	//}
+	
+	Cube* cubeObj = new Cube("Cube");
+	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
+	cubeObj->setScale(Vector3D(0.5, 0.5, .5));
+	gameObj.push_back(cubeObj);
+
+	Plane* planeObj = new Plane("Plane");
+	planeObj->setScale(Vector3D(1, 0, 0));
+	gameObj.push_back(planeObj);
 }
 
 void AppWindow::onUpdate()
@@ -46,11 +55,9 @@ void AppWindow::onUpdate()
 	//Set default shader in the graphics pipelinee to be able to draw
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	//quad1->update(EngineTime::getDeltaTime());
-	//quad1->draw(width, height);
-	for (int i = 0; i < cubeList.size(); i++) {
-		cubeList[i]->update(EngineTime::getDeltaTime());
-		cubeList[i]->draw(width, height);
+	for (int i = 0; i < gameObj.size(); i++) {
+		gameObj[i]->update(EngineTime::getDeltaTime());
+		gameObj[i]->draw(width, height);
 	}
 	m_swap_chain->present(true);
 }

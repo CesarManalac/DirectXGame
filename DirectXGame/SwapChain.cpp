@@ -7,7 +7,7 @@ SwapChain::SwapChain()
 
 bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 {
-	ID3D11Device* device = GraphicsEngine::get()->m_d3d_device;
+	ID3D11Device* deviceContext = GraphicsEngine::get()->m_d3d_device;
 	
 	DXGI_SWAP_CHAIN_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
@@ -23,7 +23,7 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 	desc.SampleDesc.Quality = 0;
 	desc.Windowed = TRUE;
 	
-	HRESULT hr = GraphicsEngine::get()->m_dxgi_factory->CreateSwapChain(device, &desc, &m_swap_chain);
+	HRESULT hr = GraphicsEngine::get()->m_dxgi_factory->CreateSwapChain(deviceContext, &desc, &m_swap_chain);
 
 	if (FAILED(hr)) {
 		return false;
@@ -35,13 +35,30 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 	if (FAILED(hr)) {
 		return false;
 	}
-	device->CreateRenderTargetView(buffer, NULL, &m_rtv);
+	deviceContext->CreateRenderTargetView(buffer, NULL, &m_rtv);
 	buffer->Release();
 
 	if (FAILED(hr)) {
 		return false;
 	}
 
+	D3D11_TEXTURE2D_DESC texDesc = {};
+	texDesc.Width = width;
+	texDesc.Height = height;
+	texDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	texDesc.Usage = D3D11_USAGE_DEFAULT;
+	texDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	texDesc.MipLevels = 1;
+	texDesc.SampleDesc.Count = 1;
+	texDesc.MiscFlags = 0;
+	texDesc.ArraySize = 1;
+	texDesc.CPUAccessFlags = 0;
+
+	HRESULT depthResult = deviceContext->CreateTexture2D(&texDesc, NULL, &buffer);
+
+	HRESULT depthStencilResult = deviceContext->CreateDepthStencilView(buffer, NULL, &this->m_dsv);
+
+	buffer->Release();
 	return true;
 }
 
@@ -56,6 +73,15 @@ bool SwapChain::release()
 	m_swap_chain->Release();
 	delete this;
 	return true;
+}
+
+ID3D11RenderTargetView* SwapChain::getRenderTargetView() {
+
+	return this->m_rtv;
+}
+ID3D11DepthStencilView* SwapChain::getDepthStencilView() {
+
+	return this->m_dsv;
 }
 
 SwapChain::~SwapChain()

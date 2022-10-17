@@ -1,3 +1,3 @@
 ﻿  AppWindow.cpp
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(52,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(67,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   DirectXGame.vcxproj -> C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe
