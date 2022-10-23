@@ -20,7 +20,7 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 	
-	//for (int i = 0; i < 1; i++) {
+	//for (int i = 0; i < 100; i++) {
 	//	//float min = -0.75f;
 	//	//float max = 0.75f;
 	//	//float minSpeed = -3.75;

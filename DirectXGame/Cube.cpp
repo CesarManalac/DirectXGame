@@ -88,7 +88,6 @@ void Cube::UpdateCubePosition()
 
 	Matrix4x4 trans;
 	trans.setTranslation(this->getLocalPosition());
-	std::cout << this->getLocalPosition().x << "\n";
 	cc.m_world.setScale(this->getLocalScale());
 
 	temp.setIdentity();
