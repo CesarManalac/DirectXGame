@@ -58,28 +58,23 @@ void AppWindow::onMouseClick(POINT new_pos)
 	height = rc.bottom - rc.top;
 	width /= 2;
 	height /= 2;
-
 	if (new_pos.x >= width) {
 		new_pos.x *= 1;
-	}
-	else {
-		new_pos.x *= -1;
 	}
 	if (new_pos.y >= height) {
 		new_pos.y *= -1;
 	}
-	else {
-		new_pos.y *= 1;
-	}
 	//FIX ACCURACY PROBS COMPUTATIONS
-	float x, y;
-	x = new_pos.x / width;
-	y = new_pos.y / height;
+	float x = 0, y = 0;
+	x = ((new_pos.x / width) + x) / 2;
+	y = ((new_pos.y / height) + y) / 2;
 	float x_int, y_int;
 	x = std::modf(x, &x_int);
 	y = std::modf(y, &y_int);
 	std::cout << x << " " << y << "\n";
-
-	quad1 = new Quad(Vector3(x, y,0), rc);
+	std::cout << new_pos.x << " " << new_pos.y << "\n";
+	//std::cout << width << "\n";
+	//1004, 725
+	quad1 = new Quad(Vector3(x, y, 0), rc);
 	quadList.push_back(quad1);
 }
