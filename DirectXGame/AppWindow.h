@@ -37,6 +37,7 @@ private:
 	std::vector<AGameObject*> gameObj;
 	float rotX = 0;
 	float rotY = 0;
+	int m_scale_cube = 1;
 
 private:
 	POINT old_mouse = {};

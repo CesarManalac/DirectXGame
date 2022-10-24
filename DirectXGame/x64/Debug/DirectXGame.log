@@ -1,5 +1,4 @@
 ﻿  AppWindow.cpp
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(44,39): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(62,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(111,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(115,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data

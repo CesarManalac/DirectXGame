@@ -91,7 +91,7 @@ void Cube::UpdateCubePosition()
 	cc.m_world.setScale(this->getLocalScale());
 
 	temp.setIdentity();
-	temp.setRotationZ(this->getLocalRotation().x);
+	temp.setRotationZ(0);
 	cc.m_world *= temp;
 
 	temp.setIdentity();

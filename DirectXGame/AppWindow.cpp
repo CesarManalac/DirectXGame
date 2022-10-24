@@ -37,13 +37,13 @@ void AppWindow::onCreate()
 	
 	Cube* cubeObj = new Cube("Cube");
 	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
-	cubeObj->setScale(Vector3D(0.5, 0.5, .5));
+	cubeObj->setScale(Vector3D(1, 1, 1));
 	gameObj.push_back(cubeObj);
 
-	Plane* planeObj = new Plane("Plane");
-	planeObj->setScale(Vector3D(4, 1, .10));
-	planeObj->setRotation(Vector3D(0, 90, 0));
-	gameObj.push_back(planeObj);
+	//Plane* planeObj = new Plane("Plane");
+	//planeObj->setScale(Vector3D(4, 1, .10));
+	//planeObj->setRotation(Vector3D(0, 90, 0));
+	//gameObj.push_back(planeObj);
 }
 
 void AppWindow::onUpdate()
@@ -109,19 +109,19 @@ void AppWindow::onKeyDown(int key)
 {
 	if (key == 'W') {
 		rotX += 0.707f * EngineTime::getDeltaTime();
-		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
 	}
 	else if (key == 'S') {
 		rotX -= 0.707f * EngineTime::getDeltaTime();
-		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
 	}
 	else if (key == 'A') {
 		rotY += 0.707f * EngineTime::getDeltaTime();
-		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
 	}
 	else if (key == 'D') {
 		rotY -= 0.707f * EngineTime::getDeltaTime();
-		gameObj[1]->setRotation(Vector3D(rotX, rotY, 0));
+		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
 	}
 }
 
@@ -139,18 +139,22 @@ void AppWindow::onMouseMove(const Point& delta_mouse)
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
+	gameObj[0]->setScale(Vector3D(0.5, 0.5, 0.5));
 }
 
 void AppWindow::onLeftMouseUp(const Point& mouse_pos)
 {
+	gameObj[0]->setScale(Vector3D(1, 1, 1));
 }
 
 void AppWindow::onRightMouseDown(const Point& mouse_pos)
 {
+	gameObj[0]->setScale(Vector3D(2, 2, 2));
 }
 
 void AppWindow::onRightMouseUp(const Point& mouse_pos)
 {
+	gameObj[0]->setScale(Vector3D(1, 1, 1));
 }
 
 void AppWindow::onFocus()
