@@ -15,7 +15,8 @@ public:
 		v.z = start.z * (1.0f - delta) + end.z * (delta);
 		return v;
 	}
-
+	Vector3D operator *(float num);
+	Vector3D operator +(Vector3D vec);
 public:
 	float x, y, z;
 };

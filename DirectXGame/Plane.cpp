@@ -88,22 +88,28 @@ void Plane::UpdatePlanePosition()
 
 	Matrix4x4 trans;
 	trans.setTranslation(this->getLocalPosition());
+	cc.m_world.setIdentity();
 	cc.m_world.setScale(this->getLocalScale());
 
 	temp.setIdentity();
-	temp.setRotationZ(this->getLocalRotation().x);
+	temp.setRotationZ(getLocalRotation().z);
 	cc.m_world *= temp;
+
 	temp.setIdentity();
 	temp.setRotationY(this->getLocalRotation().y);
 	cc.m_world *= temp;
+
 	temp.setIdentity();
 	temp.setRotationX(this->getLocalRotation().x);
 	cc.m_world *= temp;
 
-	cc.m_world *= trans;
+	//cc.m_world.setIdentity();
+	cc.m_view = m_world_cam;
 
-	cc.m_view.setIdentity();
-	cc.m_projection.setOrtho((m_width) / 400.0f, (m_height) / 400.0f, -4.0f, 4.0f);
+	cc.m_projection.setIdentity();
+	cc.m_projection.setPerspectiveFovLH(1.57f, m_width / m_height, 0.1f, 100.0f);
+	
+	//cc.m_projection.setOrtho((m_width) / 400.0f, (m_height) / 400.0f, -4.0f, 4.0f);
 
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
@@ -129,6 +135,11 @@ void Plane::draw(int width, int height)
 	GraphicsEngine::get()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
+}
+
+void Plane::setView(Matrix4x4 viewMatrix)
+{
+	m_world_cam = viewMatrix;
 }
 
 void Plane::setSpeed(float speed)

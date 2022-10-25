@@ -76,37 +76,33 @@ void Cube::UpdateCubePosition()
 {
 	constant cc;
 	cc.m_time = m_delta_time * this->m_speed;
-
-	m_delta_pos += m_delta_time / 10.0f;
 	Matrix4x4 temp;
 
-	if (m_delta_pos > 1.0f) {
-		m_delta_pos = 0;
-	}
-
-	m_delta_scale += (m_delta_time / 0.55f) * this->m_speed;
-
 	Matrix4x4 trans;
+	trans.setIdentity();
 	trans.setTranslation(this->getLocalPosition());
+
+	cc.m_world.setIdentity();
 	cc.m_world.setScale(this->getLocalScale());
-
+	
 	temp.setIdentity();
-	temp.setRotationZ(0);
+	temp.setRotationZ(getLocalRotation().z);
 	cc.m_world *= temp;
-
+	
 	temp.setIdentity();
 	temp.setRotationY(this->getLocalRotation().y);
 	cc.m_world *= temp;
-
+	
 	temp.setIdentity();
 	temp.setRotationX(this->getLocalRotation().x);
 	cc.m_world *= temp;
-
 	cc.m_world *= trans;
-
-	cc.m_view.setIdentity();
-	cc.m_projection.setOrtho((m_width) / 400.0f, (m_height) / 400.0f, -4.0f, 4.0f);
-
+	
+	cc.m_view = m_world_cam;
+	
+	cc.m_projection.setIdentity();
+	cc.m_projection.setPerspectiveFovLH(1.57f, m_width/m_height, 0.1f, 100.0f);
+	//cc.m_projection.setOrtho((m_width) / 400.0f, (m_height) / 400.0f, -4.0f, 4.0f);
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
 }
@@ -131,6 +127,11 @@ void Cube::draw(int width, int height)
 	GraphicsEngine::get()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
+}
+
+void Cube::setView(Matrix4x4 viewMatrix)
+{
+	m_world_cam = viewMatrix;
 }
 
 void Cube::setSpeed(float speed)

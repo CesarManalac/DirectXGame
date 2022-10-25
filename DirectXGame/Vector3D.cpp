@@ -24,3 +24,13 @@ Vector3D::Vector3D(const Vector3D& other)
 Vector3D::~Vector3D()
 {
 }
+
+Vector3D Vector3D::operator*(float num)
+{
+	return Vector3D(x * num, y * num, z * num);
+}
+
+Vector3D Vector3D::operator+(Vector3D vec)
+{
+	return Vector3D(x + vec.x, y + vec.y, z + vec.z);
+}

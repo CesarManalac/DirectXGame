@@ -89,13 +89,13 @@ void Quad::UpdateQuadPosition()
 	m_delta_scale += m_delta_time / 0.55f;
 
 	cc.m_world.setTranslation(Vector3D(1, 1, 1));
-	cc.m_world.setScale(Vector3D::lerp(Vector3D(.5, .5, 0), Vector3D(1, 1, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
-	temp.setTranslation(Vector3D::lerp(Vector3D(-.5, -.5, 0), Vector3D(.5, .5, 0), m_delta_pos));
-	cc.m_world *= temp;
+	//cc.m_world.setScale(Vector3D::lerp(Vector3D(.5, .5, 0), Vector3D(1, 1, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
+	//temp.setTranslation(Vector3D::lerp(Vector3D(-.5, -.5, 0), Vector3D(.5, .5, 0), m_delta_pos));
+	//cc.m_world *= temp;
 
 	Matrix4x4 trans;
 	//trans.setTranslation(this->getLocalPosition());
-	//cc.m_world.setScale(this->getLocalScale());
+	cc.m_world.setScale(this->getLocalScale());
 	
 	//cc.m_world.setTranslation(this->getLocalPosition());
 	

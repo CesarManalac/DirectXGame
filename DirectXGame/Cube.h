@@ -21,6 +21,7 @@ public:
 	void UpdateCubePosition();
 	void update(float deltaTime) override;
 	void draw(int width, int height)override;
+	void setView(Matrix4x4 viewMatrix)override;
 	void setSpeed(float speed);
 	void Release();
 
@@ -42,5 +43,6 @@ private:
 	float m_delta_time;
 	float m_delta_pos = 0;
 	float m_delta_scale = 0;
+	Matrix4x4 m_world_cam;
 };
 

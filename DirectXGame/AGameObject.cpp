@@ -75,3 +75,7 @@ Vector3D AGameObject::getLocalRotation()
 {
 	return this->localRot;
 }
+
+void AGameObject::setView(Matrix4x4 viewMatrix)
+{
+}

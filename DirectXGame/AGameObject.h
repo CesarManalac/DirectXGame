@@ -29,8 +29,10 @@ public:
 	void setRotation(Vector3D rotationValue);
 	Vector3D getLocalRotation();
 
-	string getName();
+	virtual void setView(Matrix4x4 viewMatrix);
 
+	string getName();
+public:
 	struct vertex
 	{
 		Vector3D position;

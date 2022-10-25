@@ -17,34 +17,36 @@ void AppWindow::onCreate()
 	InputSystem::get()->addListener(this);
 	GraphicsEngine::get()->init();
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
+	InputSystem::get()->showCursor(false);
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 	
-	//for (int i = 0; i < 100; i++) {
-	//	//float min = -0.75f;
-	//	//float max = 0.75f;
-	//	//float minSpeed = -3.75;
-	//	//float maxSpeed = 2;
-	//	//float speed = ((((float)rand() / (float)RAND_MAX) * (maxSpeed - minSpeed)) + minSpeed);
-	//	//float x = ((((float)rand() / (float)RAND_MAX) * (max - min)) + min);
-	//	//float y = ((((float)rand() / (float)RAND_MAX) * (max - min))+min);
+	camera = new Camera();
+
+	//for (int i = 0; i < 10; i++) {
+	//	float min = -2;
+	//	float max = 2;
+	//	float x = ((((float)rand() / (float)RAND_MAX) * (max - min)) + min);
+	//	float y = ((((float)rand() / (float)RAND_MAX) * (max - min)) + min);
+	//	std::cout << x << "\n";
 	//	Cube* cubeObj = new Cube("Cube");
-	//	//cubeObj->setSpeed(speed);
-	//	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
+	//	cubeObj->setPosition(Vector3D(x, y, 0.0f));
 	//	cubeObj->setScale(Vector3D(0.25, 0.25, .25));
-	//	this->cubeList.push_back(cubeObj);
+	//	gameObj.push_back(cubeObj);
 	//}
-	
+
 	Cube* cubeObj = new Cube("Cube");
 	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
 	cubeObj->setScale(Vector3D(1, 1, 1));
 	gameObj.push_back(cubeObj);
 
-	//Plane* planeObj = new Plane("Plane");
-	//planeObj->setScale(Vector3D(4, 1, .10));
-	//planeObj->setRotation(Vector3D(0, 90, 0));
-	//gameObj.push_back(planeObj);
+	Plane* planeObj = new Plane("Plane");
+	planeObj->setScale(Vector3D(4, .05, 4));
+	planeObj->setRotation(Vector3D(0, 0, 0));
+	gameObj.push_back(planeObj);
 }
+
+
 
 void AppWindow::onUpdate()
 {
@@ -58,11 +60,14 @@ void AppWindow::onUpdate()
 	//Set default shader in the graphics pipelinee to be able to draw
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
+	camera->Update();
 	for (int i = 0; i < gameObj.size(); i++) {
+		gameObj[i]->setView(camera->GetCamera());
 		gameObj[i]->update(EngineTime::getDeltaTime());
 		gameObj[i]->draw(width, height);
 	}
 	m_swap_chain->present(true);
+	
 }
 
 void AppWindow::onDestroy()
@@ -104,37 +109,43 @@ void AppWindow::onMouseClick(POINT new_pos)
 
 	std::cout << "click\n";
 }
-
+/*
+	To replace with camera
+*/
 void AppWindow::onKeyDown(int key)
 {
 	if (key == 'W') {
-		rotX += 0.707f * EngineTime::getDeltaTime();
-		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
+		camera->SetForwardValue(1.0f);
 	}
 	else if (key == 'S') {
-		rotX -= 0.707f * EngineTime::getDeltaTime();
-		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
+		camera->SetForwardValue(-1.0f);
 	}
 	else if (key == 'A') {
-		rotY += 0.707f * EngineTime::getDeltaTime();
-		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
+		camera->setRightValue(-1.0f);
 	}
 	else if (key == 'D') {
-		rotY -= 0.707f * EngineTime::getDeltaTime();
-		gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
+		camera->setRightValue(1.0f);
 	}
 }
 
 void AppWindow::onKeyUp(int key)
 {
-
+	camera->SetForwardValue(0.0f);
+	camera->setRightValue(0.0f);
 }
 
 void AppWindow::onMouseMove(const Point& delta_mouse)
 {
-	rotX -= delta_mouse.m_y * EngineTime::getDeltaTime();
-	rotY -= delta_mouse.m_x * EngineTime::getDeltaTime();
-	gameObj[0]->setRotation(Vector3D(rotX, rotY, 0));
+	RECT rc = this->getClientWindowRect();
+	int width = rc.right - rc.left;
+	int height = rc.bottom - rc.top;
+
+	rotX += (delta_mouse.m_y - (height / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
+	rotY += (delta_mouse.m_x - (width / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
+
+	InputSystem::get()->setCursorPosition(Point((int)(width / 2.0f), (int)(height / 2.0f)));
+	
+	camera->SetRotationValue(Vector3D(rotX, rotY, 0));
 }
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
