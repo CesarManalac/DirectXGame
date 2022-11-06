@@ -17,6 +17,7 @@ public:
 	}
 	Vector3D operator *(float num);
 	Vector3D operator +(Vector3D vec);
+	Vector3D operator *(Vector3D vec);
 public:
 	float x, y, z;
 };

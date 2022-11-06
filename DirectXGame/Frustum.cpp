@@ -5,16 +5,17 @@ Frustum::Frustum(string name) :AGameObject(name)
 	vertex vertex_list[] =
 	{
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(1,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(1,1,0) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(1,0,0) },
+			//FRONT FACE
+		{Vector3D(-1.0f,-1.0f,-1.0f),     Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-1.0f,1.0f,-1.0f),      Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(1.0f,1.0f,-1.0f),       Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(1.0f,-1.0f,-1.0f),      Vector3D(1,1,1), Vector3D(1,1,1) },
 
 		//BACK FACE
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,1,0) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,1,1) },
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,1,1) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,1,0) },
+		{Vector3D(1.0f,-1.0f,1.0f),       Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(1.0f,1.0f,1.0f),        Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-1.0f,1.0f,1.0f),       Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-1.0f,-1.0f,1.0f),      Vector3D(1,1,1), Vector3D(1,1,1) },
 	};
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertex_list);
@@ -78,22 +79,16 @@ void Frustum::UpdateFrustumPosition()
 	cc.m_time = m_delta_time * this->m_speed;
 	Matrix4x4 temp;
 
-	Matrix4x4 projTrans;
-
-	/*projTrans.setIdentity();
-	projTrans.setTranslation();*/
-
 	Matrix4x4 trans;
 	trans.setIdentity();
-	trans.setTranslation(this->getLocalPosition());
+	Vector3D hold = this->getLocalPosition();
+	trans.setTranslation(Vector3D(hold.x, hold.y, hold.z + (0.1f / 2)));
 
 	cc.m_world.setIdentity();
-	cc.m_world.setScale(this->getLocalScale());
-
-
+	//cc.m_world.setScale(this->getLocalScale());
 
 	temp.setIdentity();
-	temp.setRotationZ(getLocalRotation().z);
+	temp.setRotationX(this->getLocalRotation().x);
 	cc.m_world *= temp;
 
 	temp.setIdentity();
@@ -101,14 +96,13 @@ void Frustum::UpdateFrustumPosition()
 	cc.m_world *= temp;
 
 	temp.setIdentity();
-	temp.setRotationX(this->getLocalRotation().x);
+	temp.setRotationZ(getLocalRotation().z);
 	cc.m_world *= temp;
 
-	/*cc.m_world.setPerspectiveFovLH(1.57f, m_width / m_height, 0.1f, 100.0f);
-	cc.m_world.inverse();*/
+	cc.m_world.setPerspectiveFovLH(1.57f, m_width / m_height, 0.1f, 100.0f);
+	cc.m_world.inverse();
 
 	cc.m_world *= trans;
-
 	cc.m_view = m_world_cam;
 
 	cc.m_projection.setIdentity();

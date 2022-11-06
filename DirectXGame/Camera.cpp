@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-Camera::Camera()
+Camera::Camera(string name):AGameObject(name)
 {
 	m_world_cam.setTranslation(Vector3D(0, 0, -2));
 }
@@ -9,7 +9,7 @@ Camera::~Camera()
 {
 }
 
-void Camera::Update()
+void Camera::UpdateCamera()
 {
 	Matrix4x4 temp;
 	Matrix4x4 world_cam;
@@ -32,6 +32,19 @@ void Camera::Update()
 	inverse_world = world_cam;
 }
 
+
+void Camera::update(float deltaTime) {
+
+}
+
+void Camera::draw(int width, int height) {
+
+}
+
+void Camera::setView(Matrix4x4 viewMatrix) {
+
+}
+
 void Camera::SetRotationValue(Vector3D rotation)
 {
 	this->rotVal = rotation;
@@ -46,7 +59,9 @@ void Camera::setRightValue(float right)
 {
 	m_rightward = right;
 }
-
+Matrix4x4 Camera::GetNotInverse() {
+	return m_world_cam;
+}
 Matrix4x4 Camera::GetCamera()
 {
 	return inverse_world;

@@ -21,19 +21,7 @@ void AppWindow::onCreate()
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 	
-	camera = new Camera();
-
-	//for (int i = 0; i < 10; i++) {
-	//	float min = -2;
-	//	float max = 2;
-	//	float x = ((((float)rand() / (float)RAND_MAX) * (max - min)) + min);
-	//	float y = ((((float)rand() / (float)RAND_MAX) * (max - min)) + min);
-	//	std::cout << x << "\n";
-	//	Cube* cubeObj = new Cube("Cube");
-	//	cubeObj->setPosition(Vector3D(x, y, 0.0f));
-	//	cubeObj->setScale(Vector3D(0.25, 0.25, .25));
-	//	gameObj.push_back(cubeObj);
-	//}
+	camera = new Camera("Camera");
 
 	Cube* cubeObj = new Cube("Cube");
 	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
@@ -49,9 +37,12 @@ void AppWindow::onCreate()
 	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
 	cubeObj->setScale(Vector3D(1, 1, 1));
 	gameObj.push_back(cameraRep);
+
+	frustum = new Frustum("Frustrum");
+	frustum->setPosition(Vector3D(0.0f, 0.0f, -2.0f));
+	gameObj.push_back(frustum);
+
 }
-
-
 
 void AppWindow::onUpdate()
 {
@@ -65,15 +56,15 @@ void AppWindow::onUpdate()
 	//Set default shader in the graphics pipelinee to be able to draw
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	camera->Update();
+	camera->UpdateCamera();
 	for (int i = 0; i < gameObj.size(); i++) {
-		if(gameObj[i]->getName() != "CameraRep")
+		if(gameObj[i]->getName() != "Frustrum" && gameObj[i]->getName() != "CameraRep")
 		{
 			gameObj[i]->setView(camera->GetCamera());
 			gameObj[i]->update(EngineTime::getDeltaTime());
 			gameObj[i]->draw(width, height);
 		}
-		else if(gameObj[i]->getName() == "CameraRep")
+		else if(gameObj[i]->getName() == "Frustrum" || gameObj[i]->getName() == "CameraRep")
 		{
 			if(isCamera == false)
 			{
@@ -96,34 +87,6 @@ void AppWindow::onDestroy()
 
 void AppWindow::onMouseClick(POINT new_pos)
 {
-	//RECT rc = this->getClientWindowRect();
-	//float width, height;
-	//width = rc.right - rc.left;
-	//height = rc.bottom - rc.top;
-	//width /= 2;
-	//height /= 2;
-
-	//if (new_pos.x >= 502) {
-	//	new_pos.x *= 1;
-	//}
-	//else {
-	//	new_pos.x *= -1;
-	//}
-	//if (new_pos.y >= 362.5) {
-	//	new_pos.y *= -1;
-	//}
-	//else {
-	//	new_pos.y *= 1;
-	//}
-	//float x, y;
-	//x = new_pos.x / width;
-	//y = new_pos.y / height;
-	//float x_decimal, y_decimal;
-	//x = std::modf(x, &x_decimal);
-	//y = std::modf(y, &y_decimal);
-	//std::cout << x << " " << y << "\n";
-	//quad1 = new Quad(Vector3(x, y,0), rc);
-
 	std::cout << "click\n";
 }
 /*
@@ -147,8 +110,20 @@ void AppWindow::onKeyDown(int key)
 	{
 		if(isCamera == true)
 		{
+			Vector3D holder = camera->GetNotInverse().getTranslation();
 			isCamera = false;
-
+			//Camera Rep
+			gameObj[2]->setPosition(Vector3D(holder.x,holder.y, holder.z - 1));
+			gameObj[2]->setRotation(camera->getLocalRotation());
+			
+			gameObj[3]->setPosition(holder);
+			gameObj[3]->setRotation(camera->GetNotInverse().getZDirection() * camera->GetNotInverse().getXDirection());
+			
+		}
+	}
+	else if (key == 'F') {
+		if (!isCamera) {
+			isCamera = true;
 		}
 	}
 }

@@ -21,7 +21,6 @@ Cube::Cube(string name):AGameObject(name)
 	//	{Vector3D((nearWidth * 0.5), (-nearHeight * 0.5), zNear / 2),    Vector3D(1,1,0), Vector3D(1,1,0) },
 	//	{Vector3D((-nearWidth * 0.5), (nearHeight * 0.5), zNear / 2),   Vector3D(1,1,0),  Vector3D(1,1,0) },
 	//	{Vector3D((nearWidth * 0.5), (nearHeight * 0.5), zNear / 2),     Vector3D(1,0,0), Vector3D(1,0,0) },
-
 	//	//BACK FACE
 	//	{Vector3D(-(farWidth * 0.5), (-farHeight * 0.5), (zFar - zNear)),    Vector3D(0,1,0), Vector3D(0,1,0) },
 	//	{Vector3D((farWidth * 0.5), (-farHeight * 0.5), (zFar - zNear)),    Vector3D(0,1,1), Vector3D(0,1,1) },
@@ -106,11 +105,6 @@ void Cube::UpdateCubePosition()
 	constant cc;
 	cc.m_time = m_delta_time * this->m_speed;
 	Matrix4x4 temp;
-
-	Matrix4x4 projTrans;
-
-	/*projTrans.setIdentity();
-	projTrans.setTranslation();*/
 
 	Matrix4x4 trans;
 	trans.setIdentity();

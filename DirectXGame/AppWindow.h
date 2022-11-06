@@ -16,6 +16,7 @@
 #include "Plane.h"
 #include "InputListener.h"
 #include "Camera.h"
+#include "Frustum.h"
 #include <conio.h>
 #include <vector>
 
@@ -32,6 +33,7 @@ public:
 private:
 	SwapChain* m_swap_chain;
 	Camera* camera;
+	Frustum* frustum;
 	Plane* plane;
 	std::vector<Cube*> cubeList;
 	std::vector<AGameObject*> gameObj;

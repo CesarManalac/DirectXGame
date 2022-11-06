@@ -10,6 +10,7 @@
 #include "Matrix4x4.h"
 #include "IndexBuffer.h"
 #include "AGameObject.h"
+#include "Camera.h"
 
 
 class Frustum : public AGameObject
@@ -44,5 +45,6 @@ private:
 	float m_delta_pos = 0;
 	float m_delta_scale = 0;
 	Matrix4x4 m_world_cam;
+	//Camera* camera;
 };
 
