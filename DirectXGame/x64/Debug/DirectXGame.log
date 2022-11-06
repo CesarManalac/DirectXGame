@@ -3,8 +3,7 @@ C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(104,44): warn
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(105,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(44,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(66,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(143,75): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(144,74): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(67,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(144,75): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(145,74): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   DirectXGame.vcxproj -> C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe

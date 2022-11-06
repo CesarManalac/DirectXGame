@@ -37,11 +37,12 @@ void AppWindow::onCreate()
 
 	Cube* cubeObj = new Cube("Cube");
 	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
-	cubeObj->setScale(Vector3D(1, 1, 1));
+	cubeObj->setScale(Vector3D(2, 2, 2));
 	gameObj.push_back(cubeObj);
 
 	Plane* planeObj = new Plane("Plane");
-	planeObj->setScale(Vector3D(4, .05, 4));
+	planeObj->setPosition(Vector3D(0.0f, -2.0f, 0.0f));
+	planeObj->setScale(Vector3D(4, 4, 4));
 	planeObj->setRotation(Vector3D(0, 0, 0));
 	gameObj.push_back(planeObj);
 }

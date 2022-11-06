@@ -21,24 +21,24 @@ Plane::Plane(string name):AGameObject(name)
 
 	unsigned int index_list[] =
 	{
-		//FRONT SIDE
-		0,1,2,  //FIRST TRIANGLE
-		2,3,0,  //SECOND TRIANGLE
-		//BACK SIDE
-		4,5,6,
-		6,7,4,
+		////FRONT SIDE
+		//0,1,2,  //FIRST TRIANGLE
+		//2,3,0,  //SECOND TRIANGLE
+		////BACK SIDE
+		//4,5,6,
+		//6,7,4,
 		//TOP SIDE
 		1,6,5,
 		5,2,1,
-		//BOTTOM SIDE
-		7,0,3,
-		3,4,7,
-		//RIGHT SIDE
-		3,2,5,
-		5,4,3,
-		//LEFT SIDE
-		7,6,1,
-		1,0,7
+		////BOTTOM SIDE
+		//7,0,3,
+		//3,4,7,
+		////RIGHT SIDE
+		//3,2,5,
+		//5,4,3,
+		////LEFT SIDE
+		//7,6,1,
+		//1,0,7
 	};
 
 	m_ib = GraphicsEngine::get()->createIndexBuffer();
@@ -87,7 +87,9 @@ void Plane::UpdatePlanePosition()
 	m_delta_scale += (m_delta_time / 0.55f) * this->m_speed;
 
 	Matrix4x4 trans;
+	trans.setIdentity();
 	trans.setTranslation(this->getLocalPosition());
+
 	cc.m_world.setIdentity();
 	cc.m_world.setScale(this->getLocalScale());
 
@@ -104,6 +106,7 @@ void Plane::UpdatePlanePosition()
 	cc.m_world *= temp;
 
 	//cc.m_world.setIdentity();
+	cc.m_world *= trans;
 	cc.m_view = m_world_cam;
 
 	cc.m_projection.setIdentity();
