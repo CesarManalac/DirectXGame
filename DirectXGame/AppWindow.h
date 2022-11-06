@@ -38,6 +38,7 @@ private:
 
 	float rotX = 0;
 	float rotY = 0;
+	bool isCamera = true;
 
 private:
 

@@ -153,7 +153,6 @@ public:
 		m_mat[3][2] = (-znear * zfar) / (zfar - znear);
 	}
 
-
 	~Matrix4x4(){}
 
 public:

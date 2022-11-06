@@ -120,6 +120,7 @@
     <ClCompile Include="Camera.cpp">
       <Filter>GameEngine\GraphicsEngine\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Frustum.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -189,6 +190,7 @@
     <ClInclude Include="Camera.h">
       <Filter>GameEngine\GraphicsEngine\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Frustum.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

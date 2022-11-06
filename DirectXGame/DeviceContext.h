@@ -18,6 +18,8 @@ public:
 	void drawTriangleList(UINT vertex_count, UINT start_vertex_index);
 	void drawTriangleStrip(UINT vertex_count, UINT start_vertex_index);
 	void drawIndexedTriangleList(UINT index_count, UINT start_vertex_index, UINT start_index_location);
+	void drawLineStrip(UINT vertex_count, UINT start_vertex_index);
+	void drawIndexedLineList(UINT index_count, UINT start_vertex_index, UINT start_index_location);
 	void setViewportSize(UINT width, UINT height);
 	void setVertexShader(VertexShader* vertex_shader);
 	void setPixelShader(PixelShader* pixel_shader);

@@ -44,6 +44,11 @@ void AppWindow::onCreate()
 	planeObj->setScale(Vector3D(4, .05, 4));
 	planeObj->setRotation(Vector3D(0, 0, 0));
 	gameObj.push_back(planeObj);
+	
+	Cube* cameraRep = new Cube("CameraRep");
+	cubeObj->setPosition(Vector3D(0.0f, 0.0f, 0.0f));
+	cubeObj->setScale(Vector3D(1, 1, 1));
+	gameObj.push_back(cameraRep);
 }
 
 
@@ -62,9 +67,21 @@ void AppWindow::onUpdate()
 
 	camera->Update();
 	for (int i = 0; i < gameObj.size(); i++) {
-		gameObj[i]->setView(camera->GetCamera());
-		gameObj[i]->update(EngineTime::getDeltaTime());
-		gameObj[i]->draw(width, height);
+		if(gameObj[i]->getName() != "CameraRep")
+		{
+			gameObj[i]->setView(camera->GetCamera());
+			gameObj[i]->update(EngineTime::getDeltaTime());
+			gameObj[i]->draw(width, height);
+		}
+		else if(gameObj[i]->getName() == "CameraRep")
+		{
+			if(isCamera == false)
+			{
+				gameObj[i]->setView(camera->GetCamera());
+				gameObj[i]->update(EngineTime::getDeltaTime());
+				gameObj[i]->draw(width, height);
+			}
+		}
 	}
 	m_swap_chain->present(true);
 	
@@ -125,6 +142,14 @@ void AppWindow::onKeyDown(int key)
 	}
 	else if (key == 'D') {
 		camera->setRightValue(1.0f);
+	}
+	else if(key == 'C')
+	{
+		if(isCamera == true)
+		{
+			isCamera = false;
+
+		}
 	}
 }
 

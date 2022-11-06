@@ -51,6 +51,18 @@ void DeviceContext::drawIndexedTriangleList(UINT index_count, UINT start_vertex_
 	m_device_context->DrawIndexed(index_count, start_index_location, start_vertex_index);
 }
 
+void DeviceContext::drawLineStrip(UINT vertex_count, UINT start_vertex_index)
+{
+	m_device_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+	m_device_context->Draw(vertex_count, start_vertex_index);
+}
+
+void DeviceContext::drawIndexedLineList(UINT index_count, UINT start_vertex_index, UINT start_index_location)
+{
+	m_device_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+	m_device_context->DrawIndexed(index_count, start_index_location, start_vertex_index);
+}
+
 void DeviceContext::setViewportSize(UINT width, UINT height)
 {
 	D3D11_VIEWPORT vp = {};

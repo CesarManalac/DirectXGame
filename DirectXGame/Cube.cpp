@@ -2,20 +2,49 @@
 
 Cube::Cube(string name):AGameObject(name)
 {
-	vertex vertex_list[] =
-	{
+	float zNear = 0.1f;
+	float zFar = 100.0f;
+
+	float FOV = 1.57f;
+
+	float fovRadians = FOV / 180 * 3.14;
+
+	float nearHeight = 2 * tan(fovRadians / 2) * zNear;
+	float farHeight = 2 * tan(fovRadians / 2) * (zFar - zNear);
+	float nearWidth = nearHeight * m_width / m_height;
+	float farWidth = farHeight * m_width / m_height;
+
+	//vertex vertex_list[] =
+	//{
+	//	//FRONT FACE
+	//	{Vector3D(-(nearWidth * 0.5), (-nearHeight * 0.5), zNear / 2),    Vector3D(1,0,0),  Vector3D(1,0,0) },
+	//	{Vector3D((nearWidth * 0.5), (-nearHeight * 0.5), zNear / 2),    Vector3D(1,1,0), Vector3D(1,1,0) },
+	//	{Vector3D((-nearWidth * 0.5), (nearHeight * 0.5), zNear / 2),   Vector3D(1,1,0),  Vector3D(1,1,0) },
+	//	{Vector3D((nearWidth * 0.5), (nearHeight * 0.5), zNear / 2),     Vector3D(1,0,0), Vector3D(1,0,0) },
+
+	//	//BACK FACE
+	//	{Vector3D(-(farWidth * 0.5), (-farHeight * 0.5), (zFar - zNear)),    Vector3D(0,1,0), Vector3D(0,1,0) },
+	//	{Vector3D((farWidth * 0.5), (-farHeight * 0.5), (zFar - zNear)),    Vector3D(0,1,1), Vector3D(0,1,1) },
+	//	{Vector3D((-farWidth * 0.5), (farHeight * 0.5), (zFar - zNear)),   Vector3D(0,1,1),  Vector3D(0,1,1) },
+	//	{Vector3D((farWidth * 0.5), (farHeight * 0.5), (zFar - zNear)), Vector3D(0,1,0) },
+	//};
+
+	vertex vertex_list[] = {
+		//X, Y, Z
 		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(1,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(1,1,0) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(1,0,0) },
+		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,.5), Vector3D(0.2f,0,0) },
+		{Vector3D(-0.5f,0.5f,-0.5f),     Vector3D(1,.5,1), Vector3D(0.2f,0.2f,0) },
+		{Vector3D(0.5f,0.5f,-0.5f),      Vector3D(1,.5,.5), Vector3D(0.2f,0.2f,0) },
+		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,.5), Vector3D(0.2f,0,0) },
 
 		//BACK FACE
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,1,0) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,1,1) },
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,1,1) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,1,0) },
+		{Vector3D(0.5f,-0.5f,0.5f),      Vector3D(1,0,1), Vector3D(0,0.2f,0) },
+		{Vector3D(0.5f,0.5f,0.5f),       Vector3D(1,.5,.5), Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-0.5f,0.5f,0.5f),      Vector3D(1,0,.5), Vector3D(0,0.2f,0.2f) },
+		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,.5,1), Vector3D(0,0.2f,0) },
 	};
+
+
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertex_list);
 
@@ -78,13 +107,19 @@ void Cube::UpdateCubePosition()
 	cc.m_time = m_delta_time * this->m_speed;
 	Matrix4x4 temp;
 
+	Matrix4x4 projTrans;
+
+	/*projTrans.setIdentity();
+	projTrans.setTranslation();*/
+
 	Matrix4x4 trans;
 	trans.setIdentity();
 	trans.setTranslation(this->getLocalPosition());
 
 	cc.m_world.setIdentity();
 	cc.m_world.setScale(this->getLocalScale());
-	
+
+
 	temp.setIdentity();
 	temp.setRotationZ(getLocalRotation().z);
 	cc.m_world *= temp;
@@ -96,8 +131,12 @@ void Cube::UpdateCubePosition()
 	temp.setIdentity();
 	temp.setRotationX(this->getLocalRotation().x);
 	cc.m_world *= temp;
+
+	/*cc.m_world.setPerspectiveFovLH(1.57f, m_width / m_height, 0.1f, 100.0f);
+	cc.m_world.inverse();*/
+
 	cc.m_world *= trans;
-	
+
 	cc.m_view = m_world_cam;
 	
 	cc.m_projection.setIdentity();

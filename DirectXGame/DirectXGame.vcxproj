@@ -26,6 +26,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="EngineTime.cpp" />
+    <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputSystem.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="EngineTime.h" />
+    <ClInclude Include="Frustum.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputListener.h" />
