@@ -1,8 +1,20 @@
-﻿  Cube.cpp
+﻿  AppWindow.cpp
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(104,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(105,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(86,41): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(106,48): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(111,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(165,75): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(166,74): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  Cube.cpp
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(104,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(105,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Cube.cpp(65,82): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
 C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Cube.cpp(120,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  LINK : C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe not found or not built by the last incremental link; performing full link
   DirectXGame.vcxproj -> C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe
