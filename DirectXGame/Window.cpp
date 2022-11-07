@@ -20,12 +20,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		window->onCreate();
 		break;
 	}
-	case WM_LBUTTONDOWN: {
+	case WM_SETFOCUS:
+	{
+		// Event fired when the window get focus
 		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-		RECT size;
-		GetClientRect(hwnd, &size);
-		POINT pos = { LOWORD(lparam), HIWORD(lparam) };
-		window->onMouseClick(pos);
+		window->onFocus();
+		break;
+	}
+	case WM_KILLFOCUS:
+	{
+		// Event fired when the window lost focus
+		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		window->onKillFocus();
 		break;
 	}
 	case WM_DESTROY: {
@@ -72,6 +78,7 @@ bool Window::init()
 	//show the window
 	::ShowWindow(m_hwnd, SW_SHOW);
 	::UpdateWindow(m_hwnd);
+	EngineTime::initialize();
 	m_is_run = true;
 	return true;
 }
@@ -133,7 +140,12 @@ void Window::onDestroy()
 void Window::onMouseClick(POINT new_pos)
 {
 }
-
+void Window::onFocus()
+{
+}
+void Window::onKillFocus()
+{
+}
 Window::~Window()
 {
 }

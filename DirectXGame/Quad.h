@@ -6,36 +6,21 @@
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
 #include "EngineTime.h"
-#include "Vector3.h"
+#include "Vector3D.h"
 #include "Matrix4x4.h"
-#include <vector>;
+#include "IndexBuffer.h"
+#include "AGameObject.h"
 
-struct vertex
-{
-	Vector3 position;
-	Vector3 position1;
-	Vector3 color;
-	Vector3 color1;
-};
 
-__declspec(align(16))
-struct constant
-{
-	Matrix4x4 m_world;
-	Matrix4x4 m_view;
-	Matrix4x4 m_projection;
-	float m_angle;
-};
-
-class Quad
+class Quad : public AGameObject
 {
 public:
-	Quad(RECT rc);
-	Quad(Vector3 offset, RECT rc);
+	Quad(string name);
 	~Quad();
 
 	void UpdateQuadPosition();
-	void Update();
+	void update(float deltaTime) override;
+	void draw(int width, int height)override;
 	void Release();
 
 private:
@@ -43,15 +28,21 @@ private:
 	VertexBuffer* m_vb;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
+	IndexBuffer* m_ib;
 
-	UINT size_list;
 	RECT window;
-	Vector3 tempPosition;
+	Vector3D tempPosition;
 
-	float width, height;
+	int m_width, m_height;
 	void* m_shader_byte_code;
 	size_t m_shader_size;
 	float time;
 	float m_speed = 1;
+	bool reset = true;
+private:
+	float m_old_delta;
+	float m_delta_time;
+	float m_delta_pos = 0;
+	float m_delta_scale = 0;
 };
 

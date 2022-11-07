@@ -1,11 +1,9 @@
 ﻿  AppWindow.cpp
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Quad.h(11,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(57,19): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(58,21): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-  Quad.cpp
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Quad.h(11,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Quad.cpp(24,75): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Quad.cpp(61,75): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Quad.cpp(83,37): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(104,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(105,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(67,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(144,75): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\AppWindow.cpp(145,74): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   DirectXGame.vcxproj -> C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe

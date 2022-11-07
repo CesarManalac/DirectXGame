@@ -19,6 +19,8 @@ public:
 	virtual void onUpdate();
 	virtual void onDestroy();
 	virtual void onMouseClick(POINT);
+	virtual void onFocus();
+	virtual void onKillFocus();
 
 	~Window();
 
