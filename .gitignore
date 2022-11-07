@@ -42,3 +42,10 @@ DirectXGame/.vs/DirectXGame/v16/Browse.VC.db
 *.db
 DirectXGame/.vs/DirectXGame/v17/Browse.VC.db-wal
 *.vsidx
+*.ilk
+*.log
+*.pdb
+*.tlog
+*.tlog
+*.tlog
+*.idb
