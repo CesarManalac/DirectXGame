@@ -10,7 +10,6 @@ public:
 	Camera(string name);
 	~Camera();
 	void UpdateCamera();
-	void SetRotationValue(Vector3D rotation);
 	void SetForwardValue(float forward);
 	void setRightValue(float right);
 	void update(float deltaTime) override;

@@ -113,11 +113,11 @@ void AppWindow::onKeyDown(int key)
 			Vector3D holder = camera->GetNotInverse().getTranslation();
 			isCamera = false;
 			//Camera Rep
-			gameObj[2]->setPosition(Vector3D(holder.x,holder.y, holder.z - 1));
+			gameObj[2]->setPosition(Vector3D(holder.x, holder.y, holder.z - 1));
 			gameObj[2]->setRotation(camera->getLocalRotation());
 			
 			gameObj[3]->setPosition(holder);
-			gameObj[3]->setRotation(camera->GetNotInverse().getZDirection() * camera->GetNotInverse().getXDirection());
+			gameObj[3]->setRotation(camera->getLocalRotation());
 			
 		}
 	}
@@ -145,7 +145,8 @@ void AppWindow::onMouseMove(const Point& delta_mouse)
 
 	InputSystem::get()->setCursorPosition(Point((int)(width / 2.0f), (int)(height / 2.0f)));
 	
-	camera->SetRotationValue(Vector3D(rotX, rotY, 0));
+	//camera->SetRotationValue(Vector3D(rotX, rotY, 0));
+	camera->setRotation(Vector3D(rotX, rotY, 0));
 }
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
