@@ -32,15 +32,13 @@ public:
 private:
 	SwapChain* m_swap_chain;
 	Camera* camera;
-	Plane* plane;
-	std::vector<Cube*> cubeList;
 	std::vector<AGameObject*> gameObj;
+	std::vector<Plane*> planeList;
 
 	float rotX = 0;
 	float rotY = 0;
 
 private:
-
 	// Inherited via InputListener
 	virtual void onKeyDown(int key) override;
 	virtual void onKeyUp(int key) override;

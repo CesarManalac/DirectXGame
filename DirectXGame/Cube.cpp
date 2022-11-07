@@ -4,17 +4,27 @@ Cube::Cube(string name):AGameObject(name)
 {
 	vertex vertex_list[] =
 	{
-		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(1,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(1,1,0) },
-		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(1,1,0) },
-		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(1,0,0) },
+		////FRONT FACE
+		//{Vector3D(-0.5f,-0.5f,-0.5f),   Vector3D(1,0,0),  Vector3D(1,0,0) },
+		//{Vector3D(-0.5f,0.5f,-0.5f),	Vector3D(0,1,0), Vector3D(0,1,0) },
+		//{Vector3D(0.5f,0.5f,-0.5f),		Vector3D(0,0,1),  Vector3D(0,0,1) },
+		//{Vector3D(0.5f,-0.5f,-0.5f),    Vector3D(1,0,1), Vector3D(0,1,1) },
+		////BACK FACE
+		//{Vector3D(0.5f,-0.5f,0.5f),   Vector3D(1,0,0), Vector3D(1,0,0) },
+		//{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,1,0) },
+		//{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,0,1),  Vector3D(0,0,1) },
+		//{Vector3D(-0.5f,-0.5f,0.5f),   Vector3D(1,1,0), Vector3D(1,0,1) },
 
+		//FRONT FACE
+		{Vector3D(-0.5f,-0.5f,-0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(-0.5f,0.5f,-0.5f),	Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(0.5f,0.5f,-0.5f),		Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(0.5f,-0.5f,-0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
 		//BACK FACE
-		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,1,0) },
-		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,1,1) },
-		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,1,1) },
-		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,1,0) },
+		{Vector3D(0.5f,-0.5f,0.5f),   Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
+		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
+		{Vector3D(-0.5f,-0.5f,0.5f),   Vector3D(1,1,1), Vector3D(1,1,1) },
 	};
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertex_list);
@@ -78,15 +88,21 @@ void Cube::UpdateCubePosition()
 	cc.m_time = m_delta_time * this->m_speed;
 	Matrix4x4 temp;
 
+	m_delta_pos += m_delta_time / 10.0f;
+
+	m_delta_scale += m_delta_time / 0.55f;
+
 	Matrix4x4 trans;
 	trans.setIdentity();
+	//trans.setTranslation(Vector3D::lerp(Vector3D(-.5, -.5, 0), Vector3D(.5, .5, 0), m_delta_pos));
 	trans.setTranslation(this->getLocalPosition());
 
 	cc.m_world.setIdentity();
 	cc.m_world.setScale(this->getLocalScale());
+	//cc.m_world.setScale(Vector3D::lerp(Vector3D(1, 1, 1), Vector3D(10, 0, 10), (sin(m_delta_scale) + 1.0f) / 2.0f));
 	
 	temp.setIdentity();
-	temp.setRotationZ(getLocalRotation().z);
+	temp.setRotationZ(this->getLocalRotation().z);
 	cc.m_world *= temp;
 	
 	temp.setIdentity();
