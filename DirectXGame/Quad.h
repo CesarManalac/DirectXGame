@@ -5,45 +5,53 @@
 #include "ConstantBuffer.h"
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
-
-struct vec3
-{
-	float x, y, z;
-};
+#include "EngineTime.h"
+#include "Vector3.h"
+#include "Matrix4x4.h"
+#include <vector>;
 
 struct vertex
 {
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
+	Vector3 position;
+	Vector3 position1;
+	Vector3 color;
+	Vector3 color1;
+};
+
+__declspec(align(16))
+struct constant
+{
+	Matrix4x4 m_world;
+	Matrix4x4 m_view;
+	Matrix4x4 m_projection;
+	float m_angle;
 };
 
 class Quad
 {
 public:
-	Quad(void* shader_byte_code, size_t shader_size, int index);
+	Quad(RECT rc);
+	Quad(Vector3 offset, RECT rc);
 	~Quad();
 
-	void Update(float deltaTime);
-	void Draw(VertexShader* vertexShader, PixelShader* pixelShader);
-	void Load(int index);
+	void UpdateQuadPosition();
+	void Update();
 	void Release();
 
 private:
-	ConstantBuffer* constantBuffer;
+	ConstantBuffer* m_cb;
 	VertexBuffer* m_vb;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 
-	vertex dataList[4];
 	UINT size_list;
+	RECT window;
+	Vector3 tempPosition;
 
+	float width, height;
 	void* m_shader_byte_code;
 	size_t m_shader_size;
-
-	//float ticks = 0.0f;
-	//float deltaPos = 0.0f;
-	//float deltaTime = 0.0f;
+	float time;
+	float m_speed = 1;
 };
 

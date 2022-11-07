@@ -1,24 +1,7 @@
 #include "AppWindow.h"
 #include <Windows.h>
 
-//struct vec3
-//{
-//	float x, y, z;
-//};
-//
-//struct vertex
-//{
-//	vec3 position;
-//	vec3 position1;
-//	vec3 color;
-//	vec3 color1;
-//};
 
-__declspec(align(16))
-struct constant 
-{
-	float m_angle;
-};
 
 AppWindow::AppWindow()
 {
@@ -36,30 +19,6 @@ void AppWindow::onCreate()
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
-
-	void* shader_byte_code = nullptr;
-	size_t size_shader = 0;
-	
-	/*VERTEX SHADER*/
-	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-	m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
-	quad1 = new Quad(shader_byte_code, size_shader, 0);
-	quad2 = new Quad(shader_byte_code, size_shader, 1);
-	//quad3 = new Quad(shader_byte_code, size_shader, 2);
-
-	GraphicsEngine::get()->releaseCompiledShader();
-
-	/*PIXEL SHADER*/
-	GraphicsEngine::get()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	m_ps = GraphicsEngine::get()->createPixelShader(shader_byte_code, size_shader);
-	GraphicsEngine::get()->releaseCompiledShader();
-
-	constant cc;
-	cc.m_angle = 0;
-
-	m_cb = GraphicsEngine::get()->createConstantBuffer();
-	m_cb->load(&cc, sizeof(constant));
-
 }
 
 void AppWindow::onUpdate()
@@ -71,33 +30,14 @@ void AppWindow::onUpdate()
 	//Set default shader in the graphics pipelinee to be able to draw
 	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	time += EngineTime::getDeltaTime() * m_speed;
-	if (reset) {
-		m_speed++;
-		if (m_speed >= 7)
-			reset = false;
+	if (quadList.size() != 0) {
+		for (int i = 0; i < quadList.size(); i++) {
+			//also the draw function
+			quadList[i]->Update();
+		}
 	}
-	else {
-		m_speed--;
-		if (m_speed <= 1)
-			reset = true;
-	}	
-	
-	std::cout << m_speed << " ";
-	constant cc;
-	cc.m_angle = time;
 
-	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
-
-	GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
-	GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
-
-	
-	//GraphicsEngine::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
-	//GraphicsEngine::get()->getImmediateDeviceContext()->setPixelShader(m_ps);
-	//quad1->Draw(m_vs,m_ps);
-	quad2->Draw(m_vs, m_ps);
-	//quad3->Draw(m_vs, m_ps);
+	//quad1->Update();
 	
 	m_swap_chain->present(true);
 }
@@ -105,10 +45,36 @@ void AppWindow::onUpdate()
 void AppWindow::onDestroy()
 {
 	Window::onDestroy();
-	//quad1->Release();
-	quad2->Release();
+	quad1->Release();
 	m_swap_chain->release();
-	m_vs->release();
-	m_ps->release();
 	GraphicsEngine::get()->release();
+}
+
+void AppWindow::onMouseClick(POINT new_pos)
+{
+	RECT rc = this->getClientWindowRect();
+	float width, height;
+	width = rc.right - rc.left;
+	height = rc.bottom - rc.top;
+	width /= 2;
+	height /= 2;
+	if (new_pos.x >= width) {
+		new_pos.x *= 1;
+	}
+	if (new_pos.y >= height) {
+		new_pos.y *= -1;
+	}
+	//FIX ACCURACY PROBS COMPUTATIONS
+	float x = 0, y = 0;
+	x = ((new_pos.x / width) + x) / 2;
+	y = ((new_pos.y / height) + y) / 2;
+	float x_int, y_int;
+	x = std::modf(x, &x_int);
+	y = std::modf(y, &y_int);
+	std::cout << x << " " << y << "\n";
+	std::cout << new_pos.x << " " << new_pos.y << "\n";
+	//std::cout << width << "\n";
+	//1004, 725
+	quad1 = new Quad(Vector3(x, y, 0), rc);
+	quadList.push_back(quad1);
 }

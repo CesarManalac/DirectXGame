@@ -20,6 +20,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		window->onCreate();
 		break;
 	}
+	case WM_LBUTTONDOWN: {
+		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		RECT size;
+		GetClientRect(hwnd, &size);
+		POINT pos = { LOWORD(lparam), HIWORD(lparam) };
+		window->onMouseClick(pos);
+		break;
+	}
 	case WM_DESTROY: {
 		//Event fired when destroying a window 
 		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
@@ -120,6 +128,10 @@ void Window::onUpdate()
 void Window::onDestroy()
 {
 	m_is_run = false;
+}
+
+void Window::onMouseClick(POINT new_pos)
+{
 }
 
 Window::~Window()
