@@ -55,14 +55,17 @@ void AppWindow::onCreate()
 	//	planeList.push_back(planeObj);
 	//}
 
-	Cube* cubeObj = new Cube("Cube");
-	cubeObj->setPosition(Vector3D(0, 0, 0));
-	cubeObj->setScale(Vector3D(1, 1, 1));
-	gameObj.push_back(cubeObj);
+
+	for (int i = 0; i < 3; i++) {
+		Cube* cubeObj = new Cube("Cube");
+		cubeObj->setPosition(Vector3D(0, 0, 0));
+		cubeObj->setScale(Vector3D(1, 1, 1));
+		gameObj.push_back(cubeObj);
+	}
 
 	Plane* planeObj = new Plane("Plane");
 	planeObj->setPosition(Vector3D(0, 0, 0.0f));
-	planeObj->setScale(Vector3D(1.5, 0, 1));
+	planeObj->setScale(Vector3D(10, 0, 10));
 	gameObj.push_back(planeObj);
 }
 
@@ -100,7 +103,9 @@ void AppWindow::onUpdate()
 	//planeList[0]->setPosition(Vector3D(.2, 1, 0.0f));
 	//planeList[1]->setPosition(Vector3D(1.6, 1, 0.0f));
 	//planeList[2]->setPosition(Vector3D(1, 3, 0.0f));
-
+	gameObj[0]->setPosition(Vector3D(0.0, 0.9, 0.0));
+	gameObj[1]->setPosition(Vector3D(-1.5, 2.0, 0.0));
+	gameObj[2]->setPosition(Vector3D(-1.5, 3.0, -2.0));
 	for (int i = 0; i < gameObj.size(); i++) {
 		gameObj[i]->setView(camera->GetCamera());
 		gameObj[i]->update(EngineTime::getDeltaTime());
