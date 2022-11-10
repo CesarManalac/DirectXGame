@@ -16,6 +16,7 @@
 #include "Plane.h"
 #include "InputListener.h"
 #include "Camera.h"
+#include "UIManager.h"
 #include <conio.h>
 #include <vector>
 
@@ -34,6 +35,7 @@ private:
 	Camera* camera;
 	std::vector<AGameObject*> gameObj;
 	std::vector<Plane*> planeList;
+	UIManager* mngr;
 
 	float rotX = 0;
 	float rotY = 0;

@@ -61,6 +61,30 @@
     <Filter Include="GameEngine\GraphicsEngine\Camera">
       <UniqueIdentifier>{21f89a84-c4c8-46c0-8d2b-d44e789ad1dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\ImGui">
+      <UniqueIdentifier>{83908843-ac7d-41bc-b6f7-a080361a13db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI">
+      <UniqueIdentifier>{dbb67e1b-b62d-4500-a344-de78fa2b497d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI\UIManager">
+      <UniqueIdentifier>{40a98bd1-45a5-4d3b-91fb-5e4a08477493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI\UIScreen">
+      <UniqueIdentifier>{71d68a4b-a4c7-4063-90ac-662d1358896d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI\UINames">
+      <UniqueIdentifier>{43c6360a-1708-4aaf-b0eb-7a1129358516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI\UIScreen\Credits">
+      <UniqueIdentifier>{da407330-d94f-414b-9b49-a7ec5f62eb4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI\UIScreen\MainMenu">
+      <UniqueIdentifier>{9280b0cd-95b5-49e4-9900-a81162b3716b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\UI\UIScreen\PlaceHolder">
+      <UniqueIdentifier>{855c4aee-6e82-410f-86c4-85f746d9631b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -119,6 +143,39 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>GameEngine\GraphicsEngine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>GameEngine\UI\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="AUIScreen.cpp">
+      <Filter>GameEngine\UI\UIScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditsScreen.cpp">
+      <Filter>GameEngine\UI\UIScreen\Credits</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>GameEngine\UI\UIScreen\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Placeholder.cpp">
+      <Filter>GameEngine\UI\UIScreen\PlaceHolder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +246,49 @@
     <ClInclude Include="Camera.h">
       <Filter>GameEngine\GraphicsEngine\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>GameEngine\GraphicsEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>GameEngine\UI\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="AUIScreen.h">
+      <Filter>GameEngine\UI\UIScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="UINames.h">
+      <Filter>GameEngine\UI\UINames</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditsScreen.h">
+      <Filter>GameEngine\UI\UIScreen\Credits</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>GameEngine\UI\UIScreen\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\stb_image.h" />
+    <ClInclude Include="Placeholder.h">
+      <Filter>GameEngine\UI\UIScreen\PlaceHolder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
@@ -200,5 +300,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXGame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="DLSU Logo.jpeg" />
+    <Image Include="Logo.png" />
   </ItemGroup>
 </Project>

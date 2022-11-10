@@ -1,8 +1,2 @@
-﻿  Cube.cpp
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(104,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(105,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(106,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Matrix4x4.h(107,44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Cube.cpp(65,82): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\Cube.cpp(120,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Placeholder.cpp
   DirectXGame.vcxproj -> C:\Users\Asus\Documents\GitHub\DirectXGame\DirectXGame\x64\Debug\DirectXGame.exe

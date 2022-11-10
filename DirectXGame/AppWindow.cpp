@@ -17,18 +17,17 @@ void AppWindow::onCreate()
 	InputSystem::get()->addListener(this);
 	GraphicsEngine::get()->init();
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
-	InputSystem::get()->showCursor(false);
+	//InputSystem::get()->showCursor(false);
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 	
 	camera = new Camera("Camera");
+	mngr->initialize(this->m_hwnd);
 
-	//for (int i = 0; i < 3; i++) {
-	//	Cube* cubeObj = new Cube("Cube");
-	//	cubeObj->setPosition(Vector3D(0, 0, 0));
-	//	cubeObj->setScale(Vector3D(1, 1, 1));
-	//	gameObj.push_back(cubeObj);
-	//}
+	//Cube* cubeObj = new Cube("Cube");
+	//cubeObj->setPosition(Vector3D(0, 0, 0));
+	//cubeObj->setScale(Vector3D(1, 1, 1));
+	//gameObj.push_back(cubeObj);
 
 	//Plane* planeObj = new Plane("Plane");
 	//planeObj->setPosition(Vector3D(0, 0, 0.0f));
@@ -58,6 +57,8 @@ void AppWindow::onUpdate()
 			gameObj[i]->draw(width, height);
 		}
 	}
+
+	mngr->getInstance()->drawAllUI();
 
 	m_swap_chain->present(true);
 	
@@ -101,21 +102,24 @@ void AppWindow::onKeyUp(int key)
 
 void AppWindow::onMouseMove(const Point& delta_mouse)
 {
-	RECT rc = this->getClientWindowRect();
-	int width = rc.right - rc.left;
-	int height = rc.bottom - rc.top;
 
-	rotX += (delta_mouse.m_y - (height / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
-	rotY += (delta_mouse.m_x - (width / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
 
-	InputSystem::get()->setCursorPosition(Point((int)(width / 2.0f), (int)(height / 2.0f)));
-	
-	camera->setRotation(Vector3D(rotX, rotY, 0));
+
 }
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
 	//gameObj[0]->setScale(Vector3D(0.5, 0.5, 0.5));
+	RECT rc = this->getClientWindowRect();
+	int width = rc.right - rc.left;
+	int height = rc.bottom - rc.top;
+
+	rotX += (mouse_pos.m_y - (height / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
+	rotY += (mouse_pos.m_x - (width / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
+
+	//InputSystem::get()->setCursorPosition(Point((int)(width / 2.0f), (int)(height / 2.0f)));
+
+	camera->setRotation(Vector3D(rotX, rotY, 0));
 }
 
 void AppWindow::onLeftMouseUp(const Point& mouse_pos)

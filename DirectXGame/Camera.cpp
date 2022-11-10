@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-Camera::Camera(string name) :AGameObject(name)
+Camera::Camera(string name):AGameObject(name)
 {
 	m_world_cam.setTranslation(Vector3D(0, 0, -2));
 }

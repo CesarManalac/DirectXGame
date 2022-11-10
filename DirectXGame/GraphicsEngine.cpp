@@ -117,6 +117,11 @@ IndexBuffer* GraphicsEngine::createIndexBuffer()
 	return new IndexBuffer();
 }
 
+ID3D11Device* GraphicsEngine::getDevice()
+{
+	return this->m_d3d_device;
+}
+
 GraphicsEngine* GraphicsEngine::get()
 {
 	static GraphicsEngine engine;
