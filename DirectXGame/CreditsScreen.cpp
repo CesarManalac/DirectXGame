@@ -46,7 +46,7 @@ bool CreditsScreen::LoadTextureFromFile(const char* filename, ID3D11ShaderResour
     subResource.pSysMem = image_data;
     subResource.SysMemPitch = desc.Width * 4;
     subResource.SysMemSlicePitch = 0;
-    GraphicsEngine::get()->getDevice()->CreateTexture2D(&desc, &subResource, &pTexture);
+    GraphicsEngine::get()->getRenderSystem()->getDevice()->CreateTexture2D(&desc, &subResource, &pTexture);
 
     // Create texture view
     D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
@@ -55,7 +55,7 @@ bool CreditsScreen::LoadTextureFromFile(const char* filename, ID3D11ShaderResour
     srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
     srvDesc.Texture2D.MipLevels = desc.MipLevels;
     srvDesc.Texture2D.MostDetailedMip = 0;
-    GraphicsEngine::get()->getDevice()->CreateShaderResourceView(pTexture, &srvDesc, out_srv);
+    GraphicsEngine::get()->getRenderSystem()->getDevice()->CreateShaderResourceView(pTexture, &srvDesc, out_srv);
     pTexture->Release();
 
     *out_width = image_width;

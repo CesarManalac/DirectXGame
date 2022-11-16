@@ -36,7 +36,7 @@ bool VertexBuffer::load(void* list_vertices,UINT size_vertex, UINT size_list, vo
         {"COLOR", 1, DXGI_FORMAT_R32G32B32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0}
     };
     UINT size_layout = ARRAYSIZE(layout);
-    if (FAILED(GraphicsEngine::get()->m_d3d_device->CreateInputLayout(layout, size_layout, shader_byte_code, size_byte_shader, &m_layout))) {
+    if (FAILED(m_system->m_d3d_device->CreateInputLayout(layout, size_layout, shader_byte_code, size_byte_shader, &m_layout))) {
         
         return false;
     }

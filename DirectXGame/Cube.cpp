@@ -26,7 +26,7 @@ Cube::Cube(string name):AGameObject(name)
 		//{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
 		//{Vector3D(-0.5f,-0.5f,0.5f),   Vector3D(1,1,1), Vector3D(1,1,1) },
 	};
-	m_vb = GraphicsEngine::get()->createVertexBuffer();
+	m_vb = GraphicsEngine::get()->getRenderSystem()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertex_list);
 
 	unsigned int index_list[] =
@@ -134,7 +134,7 @@ void Cube::draw(int width, int height)
 	m_height = height;
 	UpdateCubePosition();
 
-	GraphicsEngine::get()->getRenderSystem()->()->setConstantBuffer(m_vs, m_cb);
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
 
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);

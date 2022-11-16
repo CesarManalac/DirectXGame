@@ -40,6 +40,7 @@ private:
 
 	float rotX = 0;
 	float rotY = 0;
+	bool isMoving = false;
 
 private:
 	// Inherited via InputListener
