@@ -5,8 +5,7 @@
 
 
 using namespace std;
-class VertexShader;
-class PixelShader;
+#include "Prerequisites.h";
 
 class AGameObject
 {

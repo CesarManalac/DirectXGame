@@ -1,7 +1,7 @@
 #include "VertexBuffer.h"
-#include "GraphicsEngine.h"
+#include "RenderSystem.h"
 
-VertexBuffer::VertexBuffer():m_layout(0),m_buffer(0)
+VertexBuffer::VertexBuffer(RenderSystem* m_system):m_layout(0),m_buffer(0), m_system(m_system)
 {
 }
 
@@ -24,7 +24,7 @@ bool VertexBuffer::load(void* list_vertices,UINT size_vertex, UINT size_list, vo
     m_size_vertex = size_vertex;
     m_size_list = size_list;
 
-    if (FAILED(GraphicsEngine::get()->m_d3d_device->CreateBuffer(&buff_desc, &init_data, &m_buffer))) {
+    if (FAILED(m_system->m_d3d_device->CreateBuffer(&buff_desc, &init_data, &m_buffer))) {
         return false;
     }
 

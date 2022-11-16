@@ -16,7 +16,7 @@ void AppWindow::onCreate()
 	Window::onCreate();
 	InputSystem::get()->addListener(this);
 	GraphicsEngine::get()->init();
-	m_swap_chain = GraphicsEngine::get()->createSwapChain();
+	m_swap_chain = GraphicsEngine::get()->getRenderSystem()->createSwapChain();
 	//InputSystem::get()->showCursor(false);
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
@@ -41,13 +41,13 @@ void AppWindow::onUpdate()
 {
 	Window::onUpdate();
 	InputSystem::get()->update();
-	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
 		0, 0.3f, 0.4f, 1);
 	RECT rc = this->getClientWindowRect();
 	int width = rc.right - rc.left;
 	int height = rc.bottom - rc.top;
 	//Set default shader in the graphics pipelinee to be able to draw
-	GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(width, height);
+	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setViewportSize(width, height);
 
 	camera->update(EngineTime::getDeltaTime());
 	if (!gameObj.empty()) {

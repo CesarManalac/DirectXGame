@@ -43,6 +43,9 @@
     <ClCompile Include="Placeholder.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="ResourceFile.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Vector3D.cpp" />
@@ -79,8 +82,12 @@
     <ClInclude Include="Placeholder.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Prerequisites.h" />
     <ClInclude Include="Quad.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ResourceFile.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UINames.h" />

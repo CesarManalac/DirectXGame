@@ -39,8 +39,7 @@ UIManager::UIManager(HWND windowHandle)
     ImGui::StyleColorsDark();
 
     ImGui_ImplWin32_Init(windowHandle);
-    ImGui_ImplDX11_Init(GraphicsEngine::get()->m_d3d_device, GraphicsEngine::get()->m_imm_context);
-
+    ImGui_ImplDX11_Init(GraphicsEngine::get()->getRenderSystem()->m_d3d_device, GraphicsEngine::get()->getRenderSystem()->m_imm_context);
     UINames uiNames;
 
     MainMenu* mainMenu = new MainMenu();
